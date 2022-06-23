@@ -4,12 +4,12 @@
   row-gap: 47.25px;
   margin-top: 36.25px;
   margin-bottom: 67px;
-  max-width: 1280px;
+  max-width: 880px;
   width: 100%;
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1140px) {
+/* @media screen and (max-width: 1140px) {
   .content {
     margin-top: 48px;
   }
@@ -25,5 +25,5 @@
   .content {
     row-gap: 64px;
     margin-bottom: 64px;
-  }
+  } */
 }

@@ -1,0 +1,10 @@
+.profile__add-button{
+  max-width: 150px;
+  max-height: 50px;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  background-color: black;
+  background-image: url(../../../images/plus.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
