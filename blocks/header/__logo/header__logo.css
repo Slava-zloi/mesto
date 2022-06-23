@@ -5,6 +5,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top left;
+  padding-bottom: 41px;
 }
 
 @media screen and (max-width: 568px) {
