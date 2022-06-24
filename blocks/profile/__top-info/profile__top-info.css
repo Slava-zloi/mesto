@@ -1,6 +1,8 @@
 .profile__top-info{
   display: flex;
   justify-content: flex-start;
+  gap: 18px;
+  align-items: center;
 
 
 }

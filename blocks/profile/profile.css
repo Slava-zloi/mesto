@@ -1,8 +1,7 @@
 .profile{
   display: grid;
-  grid-template-columns: 168.5px 550px 150px;
-  max-width: 880px;
+  align-items: center;
   width: 100%;
   box-sizing: border-box;
-
+  grid-template-columns:  120px 1fr 150px;
 }
