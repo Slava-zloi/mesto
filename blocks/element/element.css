@@ -1,0 +1,13 @@
+.element {
+  display: grid;
+  grid-template-areas:
+  "image image"
+  "title heart";
+  grid-template-columns: 220px 62px;
+  grid-template-rows: 282px 79px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  max-width: 282px;
+  max-height: 361px;
+
+}
