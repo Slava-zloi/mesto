@@ -10,21 +10,11 @@
   box-sizing: border-box;
 }
 
-/* @media screen and (max-width: 1140px) {
+@media screen and (max-width: 680px) {
   .content {
-    margin-top: 48px;
+    padding: 0 19px;
+    row-gap: 36px;
+    margin-top: 38.25px;
+    margin-bottom: 48px;
   }
 }
-@media screen and (max-width: 911px) {
-  .content {
-    row-gap: 88px;
-    margin-bottom: 88px;
-  }
-}
-
-@media screen and (max-width: 568px) {
-  .content {
-    row-gap: 64px;
-    margin-bottom: 64px;
-  } */
-

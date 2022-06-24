@@ -5,12 +5,13 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: top left;
-  padding-bottom: 41px;
+  box-sizing: border-box;
+  margin: 45px 19px 41px;
 }
 
 @media screen and (max-width: 568px) {
   .header__logo{
-    width: 1103.74px;
+    width: 103.74px;
     height: 24.4px;
   }
 }
