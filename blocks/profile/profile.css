@@ -10,10 +10,10 @@
 @media screen and (max-width: 680px) {
   .profile {
     grid-template-areas:
-    ". avatar ."
+    "avatar avatar avatar"
     ". info edit"
     "add-btn add-btn add-btn";
-    grid-template-columns: 1fr max-content 1fr;
+    grid-template-columns: 1fr minmax(200px, max-content) 1fr;
     grid-template-rows: repeat(3,max-content);
     justify-items: center;
   }
