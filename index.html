@@ -14,7 +14,21 @@
   <header class="header">
     <a class="header__logo" href="#"></a>
   </header>
+  <!-- Всплывающая форма -->
   <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form>
+        <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="inputName">
+        <input class="popup__input popup__input_type_status" type="text" placeholder="О себе" name="inputStatus">
+        <button class="popup__save" type="submit">
+          Сохранить
+        </button>
+      </form>
+    </div>
+</div>
+  <!-- <div class="popup">
     <form class="popup__container" name="profileEditForm">
       <h2 class="popup__title">Редактировать профиль</h2>
       <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="inputName">
@@ -22,9 +36,9 @@
       <button class="popup__save" type="submit">
         Сохранить
       </button>
-      <button class="popup__close"></button>
+      <button class="popup__close" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
     </form>
-  </div>
+  </div> -->
   <main class="content">
   <!-- блок Профиль-->
     <section class="profile">
@@ -33,40 +47,40 @@
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__status">Исследователь океана </p>
       </div>
-      <button class="profile__edit-button" type="button"></button>
-      <button class="profile__add-button" type="button"></button>
+      <button class="profile__edit-button" type="button" aria-label="Открыть форму редактирования профиля"></button>
+      <button class="profile__add-button" type="button" aria-label="Открыть форму добавления карточки интересного места"></button>
     </section>
  <!-- блок Элементы-->
     <section class="elements">
       <article class="element">
         <img class="element__image" src="./images/balaklava.jpg" alt="Балклавская бухта летом: море и гора">
         <h2 class="element__title">Балаклава</h2>
-        <figure class="element__heart"></figure>
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/rosa-hutor.jpg" alt="Роза-хутор: вид с вершины Роза-пик зимой, снег и голубое небо"/>
         <h2 class="element__title">Роза-Хутор</h2>
-        <figure class="element__heart"></figure>
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/kolskiy.jpg" alt="Кольский полуостров: каменные уступы, рыже-зелёный мох на земле и серое небо"/>
         <h2 class="element__title">Кольский полуостров</h2>
-        <figure class="element__heart"> </figure>
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/karelia.jpg" alt="Волны Белого моря и остров, заросший соснами, вдали"/>
         <h2 class="element__title">Карелия</h2>
-        <figure class="element__heart"></figure>
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/Nizhny_Novgorod.jpg" alt="Прогулочная дорожка вокруг стен нижегородского Кремля на холме"/>
         <h2 class="element__title">Нижний Новгород</h2>
-        <figure class="element__heart"></figure>
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
       </article>
       <article class="element">
         <img class="element__image" src="./images/kurshskaya_kosa.jpg" alt="Куршская Коса: изогнутые сосны и легкий утренний туман"/>
         <h2 class="element__title">Куршская коса</h2>
-        <button class="element__heart" type="button"></button>
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
       </article>
     </section>
   </main>
