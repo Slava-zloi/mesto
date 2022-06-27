@@ -12,6 +12,11 @@
   padding: 0;
 }
 
+.popup__save:hover {
+  opacity: .6;
+  transition: .3s ease-in-out;
+}
+
 @media screen and (max-width: 680px) {
   .popup__save{
     font-size: 14px;
