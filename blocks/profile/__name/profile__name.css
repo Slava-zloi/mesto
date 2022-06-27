@@ -7,13 +7,13 @@
   white-space: nowrap;
   overflow: hidden;
   box-sizing: border-box;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 680px) {
   .profile__name {
     font-size: 27px;
     line-height: 33px;
-    max-width: 100%;
     text-align: center;
   }
 }
