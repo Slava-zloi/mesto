@@ -18,7 +18,6 @@ function closeFormEdit() {
   formEdit.classList.remove('popup_opened');
 }
 
-
 function formSubmitHandler(evt) {
   evt.preventDefault();
   let profileName = profile.querySelector('.profile__name');
