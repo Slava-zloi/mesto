@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   background-position: top left;
   /* box-sizing: border-box; */
-  margin: 45px 0 41px;
+  margin: 0;
 }
 
 @media screen and (max-width: 680px) {

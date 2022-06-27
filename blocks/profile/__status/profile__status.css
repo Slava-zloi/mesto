@@ -1,9 +1,15 @@
 .profile__status {
   margin: 0;
-  padding: 16px 0 0;
+  padding: 8px 0 0 0;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+
 }
 
 @media screen and (max-width: 680px) {
@@ -11,6 +17,6 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    padding: 14px 0 0;
+    padding: 14px 0 0 0;
   }
 }

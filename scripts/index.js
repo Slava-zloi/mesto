@@ -6,7 +6,6 @@ let inputNames = Container.querySelectorAll('.popup__input');
 let btnSave = Container.querySelector('.popup__save');
 let profile = document.querySelector('.profile');
 
-
 function openFormEdit() {
   let profileName = profile.querySelector('.profile__name');
   let profileStatus = profile.querySelector('.profile__status');

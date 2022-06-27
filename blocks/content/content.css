@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 47.25px;
-  margin-top: 36.25px;
+  row-gap: 51px;
+  margin-top: 40px;
   margin-bottom: 67px;
   max-width: 880px;
   width: 100%;
@@ -14,7 +14,7 @@
   .content {
     padding: 0 19px;
     row-gap: 36px;
-    margin-top: 38.25px;
+    margin-top: 40px;
     margin-bottom: 48px;
   }
 }
