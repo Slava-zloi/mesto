@@ -7,3 +7,9 @@
   grid-area: heart;
   margin: 31px 20px 30px 20px;
 }
+
+.element__heart:hover {
+  opacity: .6;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
