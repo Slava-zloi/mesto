@@ -17,9 +17,9 @@
   <!-- Всплывающая форма -->
   <div class="popup">
     <div class="popup__container">
-      <button class="popup__close" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
+      <button class="popup__close" type="button" type="button" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form>
+      <form class="popup__form" name="formEdit">
         <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="inputName">
         <input class="popup__input popup__input_type_status" type="text" placeholder="О себе" name="inputStatus">
         <button class="popup__save" type="submit">
@@ -27,18 +27,7 @@
         </button>
       </form>
     </div>
-</div>
-  <!-- <div class="popup">
-    <form class="popup__container" name="profileEditForm">
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="inputName">
-      <input class="popup__input popup__input_type_status" type="text" placeholder="О себе" name="inputStatus">
-      <button class="popup__save" type="submit">
-        Сохранить
-      </button>
-      <button class="popup__close" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
-    </form>
-  </div> -->
+  </div>
   <main class="content">
   <!-- блок Профиль-->
     <section class="profile">
