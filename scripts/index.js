@@ -7,6 +7,7 @@ let inputStatus = formEditContainer.querySelector('.popup__input_type_status');
 let btnSave = formEditContainer.querySelector('.popup__save');
 let profile = document.querySelector('.profile');
 let formEdit = formEditContainer.querySelector('.popup__form');
+let btnHeart = document.querySelectorAll('.element__heart');
 
 function openFormEdit() {
   let profileName = profile.querySelector('.profile__name');
@@ -14,6 +15,7 @@ function openFormEdit() {
   inputName.value= profileName.textContent;
   inputStatus.value = profileStatus.textContent;
   popupEdit.classList.add('popup_opened');
+  // element.classList.add('element__heart_active');
  }
 
 function closeFormEdit() {
@@ -29,6 +31,11 @@ function formSubmitHandler(evt) {
   closeFormEdit();
 }
 
+function heartClick() {
+  this.classList.toggle('element__heart_active');
+}
+
 btnEdit.addEventListener('click', openFormEdit);
 btnClose.addEventListener('click', closeFormEdit);
 formEdit.addEventListener('submit', formSubmitHandler);
+btnHeart.forEach(element => element.addEventListener('click', heartClick));
