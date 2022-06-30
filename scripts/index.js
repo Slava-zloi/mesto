@@ -15,7 +15,6 @@ function openFormEdit() {
   inputName.value= profileName.textContent;
   inputStatus.value = profileStatus.textContent;
   popupEdit.classList.add('popup_opened');
-  // element.classList.add('element__heart_active');
  }
 
 function closeFormEdit() {
