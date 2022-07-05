@@ -1,4 +1,3 @@
-
 const popupEdit = document.querySelector('.popup');
 const formEditContainer = document.querySelector('.popup__container');
 const inputName = formEditContainer.querySelector('.popup__input_type_name');
@@ -12,7 +11,46 @@ const btnProfileEdit =  document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
 
+const elementsContainer = document.querySelector('.elements');
 const btnHeart = document.querySelectorAll('.element__heart');
+const initialElements = [
+  {
+    name: 'Балаклава',
+    link: './images/balaklava.jpg'
+  },
+  {
+    name: 'Роза-Хутор',
+    link: './images/rosa-hutor.jpg'
+  },
+  {
+    name: 'Кольский полуостров',
+    link: './images/kolskiy.jpg'
+  },
+  {
+    name: 'Карелия',
+    link: './images/karelia.jpg'
+  },
+  {
+    name: 'Нижний Новгород',
+    link: './images/Nizhny_Novgorod.jpg'
+  },
+  {
+    name: 'Куршская коса',
+    link: './images/kurshskaya_kosa.jpg'
+  }
+];
+
+for(let elIndex = initialElements.length-1; elIndex>=0; elIndex--){
+    addElement(initialElements[elIndex].name, initialElements[elIndex].link);
+}
+
+function addElement(elementTitle, elementImage) {
+  const elementTemplate = document.querySelector('#element-template').content;
+  const itemElement = elementTemplate.querySelector('.element').cloneNode(true);
+  itemElement.querySelector('.element__title').textContent = elementTitle;
+  itemElement.querySelector('.element__image').src = elementImage;
+  elementsContainer.prepend(itemElement);
+}
 
 function openFormEdit() {
   inputName.value= profileName.textContent;
@@ -39,3 +77,10 @@ btnProfileEdit.addEventListener('click', openFormEdit);
 btnClose.addEventListener('click', closeFormEdit);
 formEdit.addEventListener('submit', formSubmitHandler);
 btnHeart.forEach(element => element.addEventListener('click', heartClick));
+
+
+// addButton.addEventListener('click', function () {
+//   const artist = document.querySelector('.input__text_type_artist');
+//   const title = document.querySelector('.input__text_type_title');
+//   addSong(artist.value, title.value);
+// }

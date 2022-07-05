@@ -41,7 +41,7 @@
     </section>
  <!-- блок Элементы-->
     <section class="elements">
-      <article class="element">
+      <!-- <article class="element">
         <button class="element__bucket" type="button" aria-label="удалить карточку места"></button>
         <img class="element__image" src="./images/balaklava.jpg" alt="Балклавская бухта летом: море и гора">
         <h2 class="element__title">Балаклава</h2>
@@ -71,12 +71,20 @@
         <img class="element__image" src="./images/kurshskaya_kosa.jpg" alt="Куршская Коса: изогнутые сосны и легкий утренний туман"/>
         <h2 class="element__title">Куршская коса</h2>
         <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
-      </article>
+      </article> -->
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Место Russia</p>
   </footer>
+  <template  id="element-template">
+    <article class="element">
+      <button class="element__bucket" type="button" aria-label="удалить карточку места"></button>
+      <img class="element__image" src="./images/balaklava.jpg" alt="Балклавская бухта летом: море и гора">
+      <h2 class="element__title">Балаклава</h2>
+      <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
+    </article>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
