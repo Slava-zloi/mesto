@@ -7,12 +7,12 @@ const btnClose = formEditContainer.querySelector('.popup__close');
 const formEdit = formEditContainer.querySelector('.popup__form');
 
 const profile = document.querySelector('.profile');
-const btnProfileEdit =  document.querySelector('.profile__edit-button');
-const profileName = document.querySelector('.profile__name');
-const profileStatus = document.querySelector('.profile__status');
+const btnProfileEdit =  profile.querySelector('.profile__edit-button');
+const profileName = profile.querySelector('.profile__name');
+const profileStatus = profile.querySelector('.profile__status');
+const btnElementAdd = profile.querySelector('.profile__add-button');
 
 const elementsContainer = document.querySelector('.elements');
-const btnHeart = document.querySelectorAll('.element__heart');
 const initialElements = [
   {
     name: 'Балаклава',
@@ -56,6 +56,8 @@ function addElement(elementTitle, elementImage, elementAlt) {
   itemElement.querySelector('.element__title').textContent = elementTitle;
   itemElement.querySelector('.element__image').src = elementImage;
   itemElement.querySelector('.element__image').alt = elementAlt;
+  let btnHeart = itemElement.querySelector('.element__heart');
+  btnHeart.addEventListener('click', heartClick);
   elementsContainer.prepend(itemElement);
 }
 
@@ -82,8 +84,9 @@ function heartClick() {
 
 btnProfileEdit.addEventListener('click', openFormEdit);
 btnClose.addEventListener('click', closeFormEdit);
+btnElementAdd.addEventListener('click', openFormEdit);
 formEdit.addEventListener('submit', formSubmitHandler);
-btnHeart.forEach(element => element.addEventListener('click', heartClick));
+
 // addButton.addEventListener('click', function () {
 //   const artist = document.querySelector('.input__text_type_artist');
 //   const title = document.querySelector('.input__text_type_title');
