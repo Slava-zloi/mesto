@@ -57,8 +57,16 @@ function addElement(elementTitle, elementImage, elementAlt) {
   itemElement.querySelector('.element__image').src = elementImage;
   itemElement.querySelector('.element__image').alt = elementAlt;
   let btnHeart = itemElement.querySelector('.element__heart');
+  let btnDeleteElement = itemElement.querySelector('.element__bucket');
   btnHeart.addEventListener('click', heartClick);
+  btnDeleteElement.addEventListener('click', deleteElement);
   elementsContainer.prepend(itemElement);
+}
+
+function deleteElement() {
+  const listItem = this.closest('.element');
+  console.log(listItem);
+  listItem.remove();
 }
 
 function openFormEdit() {
