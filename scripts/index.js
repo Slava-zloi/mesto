@@ -101,7 +101,7 @@ function formSubmitHandler(evt) {
 
 function formCreateSubmitHandler(evt){
   evt.preventDefault();
-  addElement(inputElementTitle.textContent, inputElementSrc.textContent, '');
+  addElement(inputElementTitle.value, inputElementSrc.value, '');
   closeCreateForm();
 }
 
