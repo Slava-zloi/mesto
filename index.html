@@ -15,15 +15,28 @@
     <a class="header__logo" href="#"></a>
   </header>
   <!-- Всплывающая форма -->
-  <div class="popup">
+  <div class="popup popup__profile">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="formEdit">
-        <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="inputName">
-        <input class="popup__input popup__input_type_status" type="text" placeholder="О себе" name="inputStatus">
+      <form class="popup__form" name="formProfileEdit">
+        <input class="popup__input popup__input_type_profile-name" type="text" placeholder="Имя" name="inputProfileName">
+        <input class="popup__input popup__input_type_profile-status" type="text" placeholder="О себе" name="inputProfileStatus">
         <button class="popup__save" type="submit">
           Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup__element">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть форму добаления карточки места без создания карточки"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form popup_createElement" name="formCreateElement">
+        <input class="popup__input popup__input_type_element-title" type="text" placeholder="Название" name="inputElementTitle">
+        <input class="popup__input popup__input_type_element-src" type="text" placeholder="Ссылка на картинку" name="inputElementImageSrc">
+        <button class="popup__create" type="submit">
+          Создать
         </button>
       </form>
     </div>

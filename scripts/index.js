@@ -1,18 +1,22 @@
-const popupEdit = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup__profile');
+const popupCreate = document.querySelector('.popup__element');
 const formEditContainer = document.querySelector('.popup__container');
-const inputName = formEditContainer.querySelector('.popup__input_type_name');
-const inputStatus = formEditContainer.querySelector('.popup__input_type_status');
-const btnSave = formEditContainer.querySelector('.popup__save');
-const btnClose = formEditContainer.querySelector('.popup__close');
-const formEdit = formEditContainer.querySelector('.popup__form');
-
+const inputName = document.querySelector('.popup__input_type_profile-name');
+const inputStatus = document.querySelector('.popup__input_type_profile-status');
+const btnSave = document.querySelector('.popup__save');
+const btnEditClose = popupEdit.querySelector('.popup__close');
+const formEdit = popupEdit.querySelector('.popup__form');
 const profile = document.querySelector('.profile');
 const btnProfileEdit =  profile.querySelector('.profile__edit-button');
 const profileName = profile.querySelector('.profile__name');
 const profileStatus = profile.querySelector('.profile__status');
 const btnElementAdd = profile.querySelector('.profile__add-button');
+const inputElementTitle = document.querySelector('.popup__input_type_element-title');
+const inputElementSrc = document.querySelector('.popup__input_type_element-src');
 
 const elementsContainer = document.querySelector('.elements');
+const btnCreateElementClose = popupCreate.querySelector('.popup__close');
+const formCreate =popupCreate.querySelector('.popup__form');
 const initialElements = [
   {
     name: 'Балаклава',
@@ -65,25 +69,40 @@ function addElement(elementTitle, elementImage, elementAlt) {
 
 function deleteElement() {
   const listItem = this.closest('.element');
-  console.log(listItem);
   listItem.remove();
 }
 
 function openFormEdit() {
-  inputName.value= profileName.textContent;
+  inputName.value = profileName.textContent;
   inputStatus.value = profileStatus.textContent;
   popupEdit.classList.add('popup_opened');
  }
 
-function closeFormEdit() {
+ function openFormCreateElement() {
+  inputElementTitle.textContent = '';
+  inputElementSrc.textContent = '';
+  let popupEl = document.querySelector('.popup__element');
+  popupEl.classList.add('popup_opened');
+ }
+
+function closeEditForm() {
   popupEdit.classList.remove('popup_opened');
 }
 
+function closeCreateForm() {
+  popupCreate.classList.remove('popup_opened');
+}
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileStatus.textContent = inputStatus.value;
-  closeFormEdit();
+  closeEditForm();
+}
+
+function formCreateSubmitHandler(evt){
+  evt.preventDefault();
+  addElement(inputElementTitle.textContent, inputElementSrc.textContent, '');
+  closeCreateForm();
 }
 
 function heartClick() {
@@ -91,12 +110,8 @@ function heartClick() {
 }
 
 btnProfileEdit.addEventListener('click', openFormEdit);
-btnClose.addEventListener('click', closeFormEdit);
-btnElementAdd.addEventListener('click', openFormEdit);
+btnEditClose.addEventListener('click', closeEditForm);
+btnCreateElementClose.addEventListener('click', closeCreateForm);
 formEdit.addEventListener('submit', formSubmitHandler);
-
-// addButton.addEventListener('click', function () {
-//   const artist = document.querySelector('.input__text_type_artist');
-//   const title = document.querySelector('.input__text_type_title');
-//   addSong(artist.value, title.value);
-// }
+formCreate.addEventListener('submit', formCreateSubmitHandler);
+btnElementAdd.addEventListener('click', openFormCreateElement)
