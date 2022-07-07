@@ -1,5 +1,5 @@
-const popupEdit = document.querySelector('.popup__profile');
-const popupCreate = document.querySelector('.popup__element');
+const popupEdit = document.querySelector('.popup_type_profile');
+const popupCreate = document.querySelector('.popup_type_element');
 const formEditContainer = document.querySelector('.popup__container');
 const inputName = document.querySelector('.popup__input_type_profile-name');
 const inputStatus = document.querySelector('.popup__input_type_profile-status');
@@ -19,7 +19,7 @@ const btnCreateElementClose = popupCreate.querySelector('.popup__close');
 const formCreate = popupCreate.querySelector('.popup__form');
 
 
-const popupForImage = document.querySelector('.popup__for-image');
+const popupForImage = document.querySelector('.popup_type_for-image');
 const popupImage = document.querySelector('.popup__image');
 const popupTitle = document.querySelector('.popup__image-title');
 const btnPopupForImageClose = popupForImage.querySelector('.popup__close');
@@ -97,7 +97,7 @@ function openFormEdit() {
  function openFormCreateElement() {
   inputElementTitle.value = '';
   inputElementSrc.value = '';
-  let popupEl = document.querySelector('.popup__element');
+  let popupEl = document.querySelector('.popup_type_element');
   popupEl.classList.add('popup_opened');
  }
 
