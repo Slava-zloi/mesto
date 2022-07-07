@@ -93,7 +93,6 @@ function openImage(){
   openPopup(popupForImage);
 }
 
-
 function openFormEdit() {
   inputName.value = profileName.textContent;
   inputStatus.value = profileStatus.textContent;
