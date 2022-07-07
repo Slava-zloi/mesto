@@ -81,7 +81,7 @@ function openImage(){
   imageInPicturePopup.src = this.src;
   currentTitle = this.closest('.element').querySelector('.element__title');
   titleInPicturePopup.textContent = currentTitle.textContent;
-  popupForImage.classList.add('popup_opened');
+  openPopup(popupForImage);
 }
 function deleteElement() {
   const currentElement = this.closest('.element');
@@ -91,37 +91,38 @@ function deleteElement() {
 function openFormEdit() {
   inputName.value = profileName.textContent;
   inputStatus.value = profileStatus.textContent;
-  popupEditProfile.classList.add('popup_opened');
+  openPopup(popupEditProfile);
  }
 
  function openFormCreateElement() {
   inputElementTitle.value = '';
   inputElementSrc.value = '';
-  popupAddCard.classList.add('popup_opened');
+  openPopup(popupAddCard);
  }
 
-function closeEditForm() {
-  popupEditProfile.classList.remove('popup_opened');
+ function openPopup(popupToOpen) {
+  popupToOpen.classList.add('popup_opened');
 }
 
-function closeCreateForm() {
-  popupAddCard.classList.remove('popup_opened');
+function closePopup(popupToClose) {
+  popupToClose.classList.remove('popup_opened');
 }
-function closeImagePopup() {
-  popupForImage.classList.remove('popup_opened');
-}
+
+// function closeImagePopup(popupToClose) {
+//   popupForImage.classList.remove('popup_opened');
+// }
 
 function submitEditProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileStatus.textContent = inputStatus.value;
-  closeEditForm();
+  closePopup(popupEditProfile);
 }
 
 function submitAddCardForm(evt){
   evt.preventDefault();
   addElement(inputElementTitle.value, inputElementSrc.value, '');
-  closeCreateForm();
+  closePopup(popupAddCard);
 }
 
 function heartClick() {
@@ -130,9 +131,8 @@ function heartClick() {
 
 btnProfileEdit.addEventListener('click', openFormEdit);
 btnElementAdd.addEventListener('click', openFormCreateElement);
-btnEditClose.addEventListener('click', closeEditForm);
-btnCreateElementClose.addEventListener('click', closeCreateForm);
+btnEditClose.addEventListener('click', () => closePopup(popupEditProfile));
+btnCreateElementClose.addEventListener('click', () =>closePopup(popupAddCard));
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 formAddCard.addEventListener('submit', submitAddCardForm);
-btnPopupForImageClose.addEventListener('click', closeImagePopup);
-
+btnPopupForImageClose.addEventListener('click', () => closePopup(popupForImage));
