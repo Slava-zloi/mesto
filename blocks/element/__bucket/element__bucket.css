@@ -4,13 +4,13 @@
   background-image: url(../../../images/trash_backet.svg);
   background-repeat: no-repeat;
   background-position: center center;
-  grid-area: heart;
-  position: absolute;
+  grid-area: image;
   justify-self: flex-end;
   margin: 20px 20px 0 0;
   padding: 0;
   border: none;
   background-color: transparent;
+
 }
 
 .element__bucket:hover {
