@@ -4,11 +4,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0;
   background-color: rgba(0,0,0,.9);
+  display: flex;
+  overflow: hidden;  /* Hide the element content, while height = 0 */
+  height: 0;
+  opacity: 0;
+  transition: height 0ms 400ms, opacity 400ms 0ms;
 }
+
 

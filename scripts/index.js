@@ -3,7 +3,7 @@ const popupCreate = document.querySelector('.popup__element');
 const formEditContainer = document.querySelector('.popup__container');
 const inputName = document.querySelector('.popup__input_type_profile-name');
 const inputStatus = document.querySelector('.popup__input_type_profile-status');
-const btnSave = document.querySelector('.popup__save');
+const btnSave = document.querySelector('.popup__button_type_save');
 const btnEditClose = popupEdit.querySelector('.popup__close');
 const formEdit = popupEdit.querySelector('.popup__form');
 const profile = document.querySelector('.profile');
@@ -73,7 +73,6 @@ function addElement(elementTitleText, elementImageSrc, elementImageAlt) {
   const btnDeleteElement = itemElement.querySelector('.element__bucket');
   btnHeart.addEventListener('click', heartClick);
   btnDeleteElement.addEventListener('click', deleteElement);
-  // elementImage.addEventListener('click', openImage(elementImage, elementTitle));
   elementImage.addEventListener('click', openImage);
   elementsContainer.prepend(itemElement);
 }
@@ -96,8 +95,8 @@ function openFormEdit() {
  }
 
  function openFormCreateElement() {
-  inputElementTitle.textContent = '';
-  inputElementSrc.textContent = '';
+  inputElementTitle.value = '';
+  inputElementSrc.value = '';
   let popupEl = document.querySelector('.popup__element');
   popupEl.classList.add('popup_opened');
  }
@@ -136,8 +135,5 @@ btnEditClose.addEventListener('click', closeEditForm);
 btnCreateElementClose.addEventListener('click', closeCreateForm);
 formEdit.addEventListener('submit', formSubmitHandler);
 formCreate.addEventListener('submit', formCreateSubmitHandler);
- btnPopupForImageClose.addEventListener('click', closeImagePopup);
+btnPopupForImageClose.addEventListener('click', closeImagePopup);
 
-//  elementImages =
-//  itemElement.forEach(element => element
-//   elementImage.addEventListener('click', openImage(elementImage, elementTitle));
