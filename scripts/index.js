@@ -58,7 +58,7 @@ const initialElements = [
 ];
 
 for(let elIndex = initialElements.length-1; elIndex>=0; elIndex--){
-  const newCard = createCard(initialElements[elIndex].name, initialElements[elIndex].link, initialElements[elIndex].alt);
+  let newCard = createCard(initialElements[elIndex].name, initialElements[elIndex].link, initialElements[elIndex].alt);
   addCard(newCard);
 }
 
@@ -73,7 +73,7 @@ function createCard(elementTitleText, elementImageSrc, elementImageAlt) {
   const btnDeleteElement = itemElement.querySelector('.element__bucket');
   btnHeart.addEventListener('click', heartClick);
   btnDeleteElement.addEventListener('click', deleteElement);
-  elementImage.addEventListener('click', openImage);
+  elementImage.addEventListener('click', () => openImage(elementTitleText, elementImageSrc, elementImageAlt));
   return itemElement;
 }
 
@@ -86,10 +86,10 @@ function deleteElement() {
   currentElement.remove();
 }
 
-function openImage(){
-  imageInPicturePopup.src = this.src;
-  currentTitle = this.closest('.element').querySelector('.element__title');
-  titleInPicturePopup.textContent = currentTitle.textContent;
+function openImage(cardName, cardSrc, cardAlt = ''){
+  titleInPicturePopup.textContent = cardName;
+  imageInPicturePopup.src = cardSrc;
+  imageInPicturePopup.alt = cardAlt;
   openPopup(popupForImage);
 }
 
@@ -122,7 +122,8 @@ function submitEditProfileForm(evt) {
 
 function submitAddCardForm(evt){
   evt.preventDefault();
-  addElement(inputElementTitle.value, inputElementSrc.value, '');
+  let newCard = createCard(inputElementTitle.value, inputElementSrc.value, '');
+  addCard(newCard);
   closePopup(popupAddCard);
 }
 
