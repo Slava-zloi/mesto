@@ -86,7 +86,7 @@ function deleteElement() {
   currentElement.remove();
 }
 
-function openImage(cardName, cardSrc, cardAlt = ''){
+function openImage(cardName, cardSrc, cardAlt){
   titleInPicturePopup.textContent = cardName;
   imageInPicturePopup.src = cardSrc;
   imageInPicturePopup.alt = cardAlt;
