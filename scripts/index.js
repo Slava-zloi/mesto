@@ -107,12 +107,14 @@ function openFormEdit() {
 
  function openPopup(popupToOpen) {
   popupToOpen.classList.add('popup_opened');
-  enableValidation();
+  const formCurrent = popupToOpen.querySelector('.popup__form');
+  enableValidation(formCurrent,selectorsCurrent);
 }
 
 function closePopup(popupToClose) {
   popupToClose.classList.remove('popup_opened');
-  RemoveInputErrors(formEditProfile)
+  const formCurrent = popupToClose.querySelector('.popup__form');
+  RemoveInputErrors(formCurrent, selectorsCurrent);
 }
 
 function submitEditProfileForm(evt) {
@@ -136,7 +138,7 @@ function heartClick() {
 btnProfileEdit.addEventListener('click', openFormEdit);
 btnElementAdd.addEventListener('click', openFormCreateElement);
 btnEditClose.addEventListener('click', () => closePopup(popupEditProfile));
-btnCreateElementClose.addEventListener('click', () =>closePopup(popupAddCard));
+btnCreateElementClose.addEventListener('click', () => closePopup(popupAddCard));
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 formAddCard.addEventListener('submit', submitAddCardForm);
 btnPopupForImageClose.addEventListener('click', () => closePopup(popupForImage));
