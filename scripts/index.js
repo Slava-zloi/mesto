@@ -107,10 +107,12 @@ function openFormEdit() {
 
  function openPopup(popupToOpen) {
   popupToOpen.classList.add('popup_opened');
+  enableValidation();
 }
 
 function closePopup(popupToClose) {
   popupToClose.classList.remove('popup_opened');
+  RemoveInputErrors(formEditProfile)
 }
 
 function submitEditProfileForm(evt) {
