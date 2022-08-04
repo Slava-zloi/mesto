@@ -24,38 +24,7 @@ const imageInPicturePopup = document.querySelector('.popup__image');
 const titleInPicturePopup = document.querySelector('.popup__image-title');
 const btnPopupForImageClose = popupForImage.querySelector('.popup__close');
 
-const initialElements = [
-  {
-    name: 'Балаклава',
-    link: './images/balaklava.jpg',
-    alt: 'Балаклавская бухта летом: море и гора'
-  },
-  {
-    name: 'Роза-Хутор',
-    link: './images/rosa-hutor.jpg',
-    alt: 'Роза-хутор: вид с вершины Роза-пик зимой, снег и голубое небо'
-  },
-  {
-    name: 'Кольский полуостров',
-    link: './images/kolskiy.jpg',
-    alt:  'Кольский полуостров: каменные уступы, рыже-зелёный мох на земле и серое небо'
-  },
-  {
-    name: 'Карелия',
-    link: './images/karelia.jpg',
-    alt:  'Волны Белого моря и остров, заросший соснами, вдали'
-  },
-  {
-    name: 'Нижний Новгород',
-    link: './images/Nizhny_Novgorod.jpg',
-    alt:  'Прогулочная дорожка вокруг стен нижегородского Кремля на холме'
-  },
-  {
-    name: 'Куршская коса',
-    link: './images/kurshskaya_kosa.jpg',
-    alt:  'Куршская Коса: изогнутые сосны и легкий утренний туман'
-  }
-];
+
 
 for(let elIndex = initialElements.length-1; elIndex>=0; elIndex--){
   let newCard = createCard(initialElements[elIndex].name, initialElements[elIndex].link, initialElements[elIndex].alt);
@@ -97,18 +66,17 @@ function openFormEdit() {
   inputName.value = profileName.textContent;
   inputStatus.value = profileStatus.textContent;
   openPopup(popupEditProfile);
- }
+}
 
 function openFormCreateElement() {
-inputElementTitle.value = '';
-inputElementSrc.value = '';
+formAddCard.reset();
 openPopup(popupAddCard);
 }
 
-function closeFormEsc(evt, popupToClose) {
+function closeFormEsc(evt) {
   if (evt.key==='Escape') {
-    window.removeEventListener('keydown',(evt) => closeFormEsc(evt,popupToOpen));
-    closePopup(popupToClose);
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
   }
 }
 
@@ -121,8 +89,8 @@ function closeFormOverlay(evt) {
 function openPopup(popupToOpen) {
   popupToOpen.classList.add('popup_opened');
   const formCurrent = popupToOpen.querySelector(selectorsCurrent.formSelector);
-  window.addEventListener('keydown',(evt) => closeFormEsc(evt,popupToOpen));
-  popupToOpen.addEventListener('click', (evt) => closeFormOverlay(evt));
+  window.addEventListener('keydown', closeFormEsc);
+  popupToOpen.addEventListener('click',closeFormOverlay);
   if (formCurrent != null){
     enableValidation(formCurrent, selectorsCurrent);
   }
@@ -131,9 +99,12 @@ function openPopup(popupToOpen) {
 function closePopup(popupToClose) {
   popupToClose.classList.remove('popup_opened');
   const formCurrent = popupToClose.querySelector(selectorsCurrent.formSelector);
+  const popupToOpen = popupToClose;
   if (formCurrent != null){
     RemoveInputErrors(formCurrent, selectorsCurrent);
   }
+  window.removeEventListener('keydown', closeFormEsc);
+  popupToOpen.removeEventListener('click', closeFormOverlay);
 }
 
 function submitEditProfileForm(evt) {
@@ -145,7 +116,7 @@ function submitEditProfileForm(evt) {
 
 function submitAddCardForm(evt){
   evt.preventDefault();
-  const newCard = createCard(inputElementTitle.value, inputElementSrc.value, '');
+  const newCard = createCard(inputElementTitle.value, inputElementSrc.value, inputElementTitle.value);
   addCard(newCard);
   closePopup(popupAddCard);
 }
