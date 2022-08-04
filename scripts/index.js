@@ -69,8 +69,8 @@ function openFormEdit() {
 }
 
 function openFormCreateElement() {
-formAddCard.reset();
-openPopup(popupAddCard);
+  formAddCard.reset();
+  openPopup(popupAddCard);
 }
 
 function closeFormEsc(evt) {
