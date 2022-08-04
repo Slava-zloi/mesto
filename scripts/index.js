@@ -145,13 +145,9 @@ function submitEditProfileForm(evt) {
 
 function submitAddCardForm(evt){
   evt.preventDefault();
-  let newCard = createCard(inputElementTitle.value, inputElementSrc.value, '');
+  const newCard = createCard(inputElementTitle.value, inputElementSrc.value, '');
   addCard(newCard);
   closePopup(popupAddCard);
-}
-
-function removeListener(){
-
 }
 
 function heartClick() {
