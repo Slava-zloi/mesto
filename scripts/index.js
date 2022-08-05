@@ -91,9 +91,6 @@ function openPopup(popupToOpen) {
   const formCurrent = popupToOpen.querySelector(selectorsCurrent.formSelector);
   window.addEventListener('keydown', closeFormEsc);
   popupToOpen.addEventListener('click',closeFormOverlay);
-  // if (formCurrent != null){
-  //   enableValidation(formCurrent, selectorsCurrent);
-  // }
 }
 
 function closePopup(popupToClose) {
