@@ -23,7 +23,7 @@ const popupForImage = document.querySelector('.popup_type_for-image');
 const imageInPicturePopup = document.querySelector('.popup__image');
 const titleInPicturePopup = document.querySelector('.popup__image-title');
 const btnPopupForImageClose = popupForImage.querySelector('.popup__close');
-
+const formsToListen = document.querySelectorAll(selectorsCurrent.formSelector);
 
 
 for(let elIndex = initialElements.length-1; elIndex>=0; elIndex--){
@@ -91,9 +91,9 @@ function openPopup(popupToOpen) {
   const formCurrent = popupToOpen.querySelector(selectorsCurrent.formSelector);
   window.addEventListener('keydown', closeFormEsc);
   popupToOpen.addEventListener('click',closeFormOverlay);
-  if (formCurrent != null){
-    enableValidation(formCurrent, selectorsCurrent);
-  }
+  // if (formCurrent != null){
+  //   enableValidation(formCurrent, selectorsCurrent);
+  // }
 }
 
 function closePopup(popupToClose) {

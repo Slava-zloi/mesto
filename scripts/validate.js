@@ -62,3 +62,7 @@ const setEventListeners = (formElement, selectors) => {
 const enableValidation = (formElement, selectors) => {
     setEventListeners(formElement, selectors);
 }
+
+formsToListen.forEach((formElement) => {
+  enableValidation(formElement, selectorsCurrent)
+});
