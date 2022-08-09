@@ -88,9 +88,9 @@ function closeFormOverlay(evt) {
 
 function openPopup(popupToOpen) {
   popupToOpen.classList.add('popup_opened');
-  const formCurrent = popupToOpen.querySelector(selectorsCurrent.formSelector);
+  // const formCurrent = popupToOpen.querySelector(selectorsCurrent.formSelector);
   window.addEventListener('keydown', closeFormEsc);
-  popupToOpen.addEventListener('click',closeFormOverlay);
+  popupToOpen.addEventListener('click', closeFormOverlay);
 }
 
 function closePopup(popupToClose) {
