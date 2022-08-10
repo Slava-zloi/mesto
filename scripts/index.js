@@ -68,7 +68,6 @@ function openPopup(popupToOpen) {
   popupToOpen.classList.add('popup_opened');
   window.addEventListener('keydown', closeFormEsc);
   popupToOpen.addEventListener('click',closeFormOverlay);
-
 }
 
 function closePopup(popupToClose) {
@@ -84,19 +83,21 @@ function submitEditProfileForm(evt) {
   closePopup(popupEditProfile);
 }
 
+const makeNewCard = (cardTitle, cardSrc, cardAlt, templateHtml) => {
+  const card = new Card(cardTitle, cardSrc, cardAlt, templateHtml, openImage);
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
 function submitAddCardForm(evt){
   evt.preventDefault();
-  const cardNew = new Card(inputElementTitle.value, inputElementSrc.value, inputElementTitle.value,'#element-template');
-  const cardElement = cardNew.createCard();
-  elementsContainer.prepend(cardElement);
+  elementsContainer.prepend(makeNewCard(inputElementTitle.value, inputElementSrc.value, inputElementTitle.value,'#element-template'));
   closePopup(popupAddCard);
 }
 
 const renderElements = () => {
   initialElements.forEach((item) => {
-    const card = new Card(item.name, item.link, item.alt,'#element-template', openImage);
-    const cardElement = card.createCard();
-    elementsContainer.append(cardElement);
+    elementsContainer.append(makeNewCard(item.name, item.link, item.alt,'#element-template'));
   });
 };
 
