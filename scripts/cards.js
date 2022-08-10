@@ -26,9 +26,10 @@ export class Card  {
   }
    createCard() {
     this._element = this._getTemplate();
+    this._image = this._element.querySelector('.element__image');
     this._element.querySelector('.element__title').textContent = this.name;
-    this._element.querySelector('.element__image').src = this.link;
-    this._element.querySelector('.element__image').alt = this.alt;
+    this._image.src = this.link;
+    this._image.alt = this.alt;
     this._setEventListeners()
     return this._element;
   }
@@ -36,6 +37,6 @@ export class Card  {
   _setEventListeners() {
     this._element.querySelector('.element__heart').addEventListener('click', () => { this._handleLikeClick() });
     this._element.querySelector('.element__bucket').addEventListener('click', () => { this._deleteElement() });
-    this._element.querySelector('.element__image').addEventListener('click', () => { this._openImage(this.name,this.link,this.alt)});
+    this._image.addEventListener('click', () => { this._openImage(this.name,this.link,this.alt)});
   }
 }

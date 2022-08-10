@@ -31,8 +31,6 @@ const formsToListen = document.querySelectorAll('.popup__form');
 
 const formToValidate = []
 
-
-
 function openFormEdit() {
   inputName.value = profileName.textContent;
   inputStatus.value = profileStatus.textContent;
