@@ -1,32 +1,41 @@
-const initialElements = [
-  {
-    name: 'Балаклава',
-    link: './images/balaklava.jpg',
-    alt: 'Балаклавская бухта летом: море и гора'
-  },
-  {
-    name: 'Роза-Хутор',
-    link: './images/rosa-hutor.jpg',
-    alt: 'Роза-хутор: вид с вершины Роза-пик зимой, снег и голубое небо'
-  },
-  {
-    name: 'Кольский полуостров',
-    link: './images/kolskiy.jpg',
-    alt:  'Кольский полуостров: каменные уступы, рыже-зелёный мох на земле и серое небо'
-  },
-  {
-    name: 'Карелия',
-    link: './images/karelia.jpg',
-    alt:  'Волны Белого моря и остров, заросший соснами, вдали'
-  },
-  {
-    name: 'Нижний Новгород',
-    link: './images/Nizhny_Novgorod.jpg',
-    alt:  'Прогулочная дорожка вокруг стен нижегородского Кремля на холме'
-  },
-  {
-    name: 'Куршская коса',
-    link: './images/kurshskaya_kosa.jpg',
-    alt:  'Куршская Коса: изогнутые сосны и легкий утренний туман'
+export class Card  {
+  constructor(itemName, itemSrc, itemAlt, templateSelector, openImage){
+    this.name = itemName,
+    this.link = itemSrc,
+    this.alt = itemAlt,
+    this.templateSelector = templateSelector,
+    this._openImage = openImage
   }
-];
+
+  _getTemplate() {
+    const itemElement = document
+      .querySelector(this.templateSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
+
+    return itemElement;
+  }
+
+  _handleLikeClick() {
+    this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
+  }
+
+  _deleteElement() {
+    this._element.remove();
+  }
+   createCard() {
+    this._element = this._getTemplate();
+    this._element.querySelector('.element__title').textContent = this.name;
+    this._element.querySelector('.element__image').src = this.link;
+    this._element.querySelector('.element__image').alt = this.alt;
+    this._setEventListeners()
+    return this._element;
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.element__heart').addEventListener('click', () => { this._handleLikeClick() });
+    this._element.querySelector('.element__bucket').addEventListener('click', () => { this._deleteElement() });
+    this._element.querySelector('.element__image').addEventListener('click', () => { this._openImage(this.name,this.link,this.alt)});
+  }
+}
