@@ -34,11 +34,13 @@ const formToValidate = []
 function openFormEdit() {
   inputName.value = profileName.textContent;
   inputStatus.value = profileStatus.textContent;
+  formEditProfileValidator.removeInputErrors();
   openPopup(popupEditProfile);
 }
 
 function openFormCreateElement() {
   formAddCard.reset();
+  formAddCardValidator.removeInputErrors();
   openPopup(popupAddCard);
 }
 
@@ -66,9 +68,7 @@ function openPopup(popupToOpen) {
   popupToOpen.classList.add('popup_opened');
   window.addEventListener('keydown', closeFormEsc);
   popupToOpen.addEventListener('click',closeFormOverlay);
-  formToValidate.forEach ((formValidation) => {
-    formValidation.removeInputErrors();
-  });
+
 }
 
 function closePopup(popupToClose) {
@@ -110,7 +110,8 @@ btnPopupForImageClose.addEventListener('click', () => closePopup(popupForImage))
 
 renderElements();
 
-formsToListen.forEach((formElement,index) => {
-  formToValidate[index] = new FormValidator(formElement, selectorsCurrent);
-  formToValidate[index].enableValidation();
-});
+const formEditProfileValidator = new FormValidator(formEditProfile, selectorsCurrent);
+formEditProfileValidator.enableValidation();
+
+const formAddCardValidator = new FormValidator(formAddCard, selectorsCurrent);
+formAddCardValidator.enableValidation();
