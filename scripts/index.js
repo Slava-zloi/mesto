@@ -1,5 +1,6 @@
-import {Card} from './cards.js';
-import {FormValidator, selectorsCurrent} from './validate.js';
+import { Card } from './cards.js';
+import { FormValidator, selectorsCurrent } from './validate.js';
+import { initialElements } from './initialElements.js';
 
 const popupEditProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_element');
@@ -30,38 +31,7 @@ const formsToListen = document.querySelectorAll('.popup__form');
 
 const formToValidate = []
 
-const initialElements = [
-  {
-    name: 'Балаклава',
-    link: './images/balaklava.jpg',
-    alt: 'Балаклавская бухта летом: море и гора'
-  },
-  {
-    name: 'Роза-Хутор',
-    link: './images/rosa-hutor.jpg',
-    alt: 'Роза-хутор: вид с вершины Роза-пик зимой, снег и голубое небо'
-  },
-  {
-    name: 'Кольский полуостров',
-    link: './images/kolskiy.jpg',
-    alt:  'Кольский полуостров: каменные уступы, рыже-зелёный мох на земле и серое небо'
-  },
-  {
-    name: 'Карелия',
-    link: './images/karelia.jpg',
-    alt:  'Волны Белого моря и остров, заросший соснами, вдали'
-  },
-  {
-    name: 'Нижний Новгород',
-    link: './images/Nizhny_Novgorod.jpg',
-    alt:  'Прогулочная дорожка вокруг стен нижегородского Кремля на холме'
-  },
-  {
-    name: 'Куршская коса',
-    link: './images/kurshskaya_kosa.jpg',
-    alt:  'Куршская Коса: изогнутые сосны и легкий утренний туман'
-  }
-];
+
 
 function openFormEdit() {
   inputName.value = profileName.textContent;
