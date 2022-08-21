@@ -23,6 +23,7 @@ export class Card  {
 
   _deleteElement() {
     this._element.remove();
+    this._element = null;
   }
    createCard() {
     this._element = this._getTemplate();
