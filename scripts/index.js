@@ -1,7 +1,7 @@
 import { Card } from './cards.js';
 import { FormValidator, selectorsCurrent } from './validate.js';
 import { initialElements } from './initialElements.js';
-
+import Section from '../components/section.js';
 const popupEditProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_element');
 const inputName = document.querySelector('.popup__input_type_profile-name');
@@ -83,17 +83,26 @@ function submitAddCardForm(evt){
   elementsContainer.prepend(makeNewCard(inputElementTitle.value, inputElementSrc.value, inputElementTitle.value,'#element-template'));
   closePopup(popupAddCard);
 }
-const makeNewCard = (cardTitle, cardSrc, cardAlt, templateHtml) => {
-  const card = new Card(cardTitle, cardSrc, cardAlt, templateHtml, openImage);
-  const cardElement = card.createCard();
-  return cardElement;
-}
 
-const renderElements = () => {
-  initialElements.forEach((item) => {
-    elementsContainer.append(makeNewCard(item.name, item.link, item.alt,'#element-template'));
-  });
-};
+const defaultCardList = new Section({data: items, renderer: (item) => {
+    const card = new Card(item, templateHtml, openImage);
+    const cardElement = card.generateCard();
+    defaultCardList.addItem(cardElement);
+   }
+ }, cardListSelector);
+
+
+// const makeNewCard = (cardTitle, cardSrc, cardAlt, templateHtml) => {
+//   const card = new Card(cardTitle, cardSrc, cardAlt, templateHtml, openImage);
+//   const cardElement = card.createCard();
+//   return cardElement;
+// }
+
+// const renderElements = () => {
+//   initialElements.forEach((item) => {
+//     elementsContainer.append(makeNewCard(item.name, item.link, item.alt,'#element-template'));
+//   });
+// };
 
 btnProfileEdit.addEventListener('click', openFormEdit);
 btnElementAdd.addEventListener('click', openFormCreateElement);
