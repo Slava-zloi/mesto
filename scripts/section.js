@@ -1,10 +1,10 @@
-import { Card } from '../scripts/cards.js';
-import { initialElements } from '../scripts/initialElements.js';
+import { Card } from './cards.js';
+import { initialElements } from './initialElements.js';
 export default class Section {
-  constructor ({items, renderer}, elementsContainer){
-    this._initialArray = items;
+  constructor ({data, renderer}, elementsContainer){
+    this._initialArray = data;
     this._renderer = renderer;
-    this._container = document.querySelector(elementsContainer);
+    this._container = elementsContainer;
   }
 
   renderElements() {
@@ -13,7 +13,7 @@ export default class Section {
     });
   }
 
-  addItem() {
+  addItem(element) {
     this._container.append(element);
   }
 
