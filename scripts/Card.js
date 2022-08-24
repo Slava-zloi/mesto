@@ -1,10 +1,10 @@
 export class Card  {
-  constructor(data, templateSelector, openImage){
+  constructor(data, templateSelector, { handleCardClick }){
     this.name = data.name,
-    this.link = data.link,
+    this.src = data.link,
     this.alt = data.alt,
     this.templateSelector = templateSelector,
-    this._openImage = openImage
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -29,7 +29,7 @@ export class Card  {
     this._element = this._getTemplate();
     this._image = this._element.querySelector('.element__image');
     this._element.querySelector('.element__title').textContent = this.name;
-    this._image.src = this.link;
+    this._image.src = this.src;
     this._image.alt = this.alt;
     this._setEventListeners()
     return this._element;
@@ -38,6 +38,6 @@ export class Card  {
   _setEventListeners() {
     this._element.querySelector('.element__heart').addEventListener('click', () => { this._handleLikeClick() });
     this._element.querySelector('.element__bucket').addEventListener('click', () => { this._deleteElement() });
-    this._image.addEventListener('click', () => { this._openImage(this.name,this.link,this.alt)});
+    this._image.addEventListener('click', () => { this._handleCardClick(this.name,this.src,this.alt)});
   }
 }
