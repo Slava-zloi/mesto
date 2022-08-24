@@ -17,15 +17,7 @@ export default class Section {
     this._container.append(card);
   }
 
-  // makeNewCard(cardTitle, cardSrc, cardAlt, templateHtml) {
-  //   const card = new Card(cardTitle, cardSrc, cardAlt, templateHtml, openImage);
-  //   const cardElement = card.createCard();
-  //   return cardElement;
-  // }
-
-  // renderElementsPrepend() {
-  //   this._initialArray.forEach((item) => {
-  //     elementsContainer.prepend(makeNewCard(item.name, item.link, item.alt, this._templateHtml));
-  //   });
-  // }
+  addNewItem(card) {
+    this._container.prepend(card);
+  }
 }
