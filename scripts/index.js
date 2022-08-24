@@ -24,7 +24,6 @@ const popupForImage = document.querySelector('.popup_type_for-image');
 
 const btnPopupForImageClose = popupForImage.querySelector('.popup__close');
 
-
 const defaultCardList = new Section({
   data: initialElements,
   renderer: (item) => {
@@ -35,9 +34,10 @@ const defaultCardList = new Section({
     )
     const cardElement = card.createCard();
     defaultCardList.addItem(cardElement);
-  }
-}, elementsContainer);
-
+    }
+  },
+  elementsContainer
+);
 defaultCardList.renderElements();
 
 const userInfo = new UserInfo({
