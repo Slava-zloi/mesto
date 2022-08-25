@@ -9,7 +9,8 @@
     "webpack-dev-server": "^4.10.0"
   },
   "scripts": {
-    "build": "rd /s /q dist && webpack"
+    "build": "rd /s /q dist && webpack",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
