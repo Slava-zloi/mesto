@@ -6,13 +6,6 @@ const kareliaImage = new URL('../images/karelia.jpg', import.meta.url);
 const nizhny_NovgorodImage = new URL('../images/Nizhny_Novgorod.jpg', import.meta.url);
 const kurshskaya_kosaImage = new URL('../images/kurshskaya_kosa.jpg', import.meta.url)
 
-const whoIsTheGoat = [
-  // меняем исходные пути на переменные
-  { name: 'Michael Jordan', image: jordanImage },
-  { name: 'Lebron James', link: jamesImage },
-  { name: 'Kobe Bryant', link: bryantImage },
-];
-
 export const initialElements = [
   {
     name: 'Балаклава',

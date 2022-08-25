@@ -6,6 +6,7 @@ import Popup from './components/Popup.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import PopupWithImage from './components/PicturePopup.js';
 import UserInfo from './components/UserInfo.js';
+import './pages/index.css';
 
 const popupEditProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_element');
