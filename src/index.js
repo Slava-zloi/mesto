@@ -8,22 +8,10 @@ import PopupWithImage from './components/PicturePopup.js';
 import UserInfo from './components/UserInfo.js';
 import './pages/index.css';
 
-const popupEditProfile = document.querySelector('.popup_type_profile');
-const popupAddCard = document.querySelector('.popup_type_element');
-const formAddCard = popupAddCard.querySelector('.popup__form');
-const btnEditClose = popupEditProfile.querySelector('.popup__close');
-const formEditProfile = popupEditProfile.querySelector('.popup__form');
-const profile = document.querySelector('.profile');
-const btnProfileEdit =  profile.querySelector('.profile__edit-button');
-const btnElementAdd = profile.querySelector('.profile__add-button');
-
+const btnProfileEdit =  document.querySelector('.profile__edit-button');
+const btnElementAdd = document.querySelector('.profile__add-button');
 const templateHtml = '#element-template';
 const elementsContainer = document.querySelector('.elements');
-const btnCreateElementClose = popupAddCard.querySelector('.popup__close');
-
-const popupForImage = document.querySelector('.popup_type_for-image');
-
-const btnPopupForImageClose = popupForImage.querySelector('.popup__close');
 
 const defaultCardList = new Section({
   data: initialElements,
@@ -46,6 +34,8 @@ const userInfo = new UserInfo({
   status:'.profile__status'
 });
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
+popupWithImage.setEventListeners();
+
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formData) => {
@@ -56,6 +46,7 @@ const popupEdit = new PopupWithForm({
     popupEdit.close();
   }
 });
+popupEdit.setEventListeners();
 
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_element',
@@ -74,15 +65,15 @@ const popupAdd = new PopupWithForm({
     popupAdd.close();
   }
 });
+popupAdd.setEventListeners();
 
-const formEditProfileValidator = new FormValidator(formEditProfile, selectorsCurrent);
+const formEditProfileValidator = new FormValidator(popupEdit.form, selectorsCurrent);
 formEditProfileValidator.enableValidation();
 
-const formAddCardValidator = new FormValidator(formAddCard, selectorsCurrent);
+const formAddCardValidator = new FormValidator(popupAdd.form, selectorsCurrent);
 formAddCardValidator.enableValidation();
 
 btnProfileEdit.addEventListener('click', () => {
-
   formEditProfileValidator.removeInputErrors();
   if (userInfo.getUserInfo()) {
     document.querySelector('.popup__input_type_profile-name').value = userInfo.getUserInfo().name;
@@ -91,12 +82,7 @@ btnProfileEdit.addEventListener('click', () => {
   popupEdit.open();
 });
 
-btnEditClose.addEventListener('click', () => popupEdit.close());
 btnElementAdd.addEventListener('click', () => {
   formAddCardValidator.removeInputErrors();
   popupAdd.open()
 });
-
-btnCreateElementClose.addEventListener('click', () => popupAdd.close());
-btnPopupForImageClose.addEventListener('click', () => popupWithImage.close());
-
