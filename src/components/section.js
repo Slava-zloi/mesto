@@ -1,5 +1,3 @@
-import { Card } from './Card.js';
-import { initialElements } from './initialElements.js';
 export default class Section {
   constructor ({data, renderer}, elementsContainer){
     this._initialArray = data;

@@ -7,23 +7,28 @@ import PopupWithForm from './components/PopupWithForm.js';
 import PopupWithImage from './components/PicturePopup.js';
 import UserInfo from './components/UserInfo.js';
 import './pages/index.css';
+import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus } from './utils/constants.js';
 
-const btnProfileEdit =  document.querySelector('.profile__edit-button');
-const btnElementAdd = document.querySelector('.profile__add-button');
-const templateHtml = '#element-template';
-const elementsContainer = document.querySelector('.elements');
+// в задании ПР8 был написано: Требования к коду:
+// ...
+// 4. В файле index.js должно остаться только создание классов и добавление некоторых обработчиков.
+// п.4  запрещает создание функций внутри index.js, поэтому и был выбран прошлый вариант реализации.
+
+// Предложенный вами вариант более изящный, конечно, но вступает в противоречие с пунктом 4 задания к ПР8, есл я правильно его понял.
+// Ниже реализовано ваше предложение, как я его понял, мне оно тоже нравится больше исходного варианта)))
+
+function createCard(item){
+  const card = new Card(item, templateHtml, { handleCardClick: () => {
+    popupWithImage.open(card);
+    }
+  });
+  const cardElement = card.createCard();
+  return cardElement;
+}
 
 const defaultCardList = new Section({
-  data: initialElements,
-  renderer: (item) => {
-    const card = new Card(item, templateHtml, { handleCardClick: () => {
-          popupWithImage.open(card);
-        }
-      }
-    )
-    const cardElement = card.createCard();
-    defaultCardList.addItem(cardElement);
-    }
+    data: initialElements,
+    renderer: (item) => {defaultCardList.addItem(createCard(item))}
   },
   elementsContainer
 );
@@ -51,20 +56,15 @@ popupEdit.setEventListeners();
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_element',
   handleFormSubmit: (formData) => {
-    const card = new Card({
+    defaultCardList.addNewItem(createCard({
       name: formData.inputElementTitle,
       link: formData.inputElementImageSrc,
       alt: formData.inputElementTitle
-    },
-      templateHtml,{ handleCardClick: () => {
-        popupWithImage.open(card);
-      }
-    });
-    const cardElement = card.createCard();
-    defaultCardList.addNewItem(cardElement);
+      })
+    )
     popupAdd.close();
-  }
-});
+    }
+  });
 popupAdd.setEventListeners();
 
 const formEditProfileValidator = new FormValidator(popupEdit.form, selectorsCurrent);
@@ -76,8 +76,8 @@ formAddCardValidator.enableValidation();
 btnProfileEdit.addEventListener('click', () => {
   formEditProfileValidator.removeInputErrors();
   if (userInfo.getUserInfo()) {
-    document.querySelector('.popup__input_type_profile-name').value = userInfo.getUserInfo().name;
-    document.querySelector('.popup__input_type_profile-status').value = userInfo.getUserInfo().status;
+    inputProfileName.value = userInfo.getUserInfo().name;
+    inputProfileStatus.value = userInfo.getUserInfo().status;
   }
   popupEdit.open();
 });
