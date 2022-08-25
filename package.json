@@ -1,0 +1,22 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Это одностраничный страница-визитка или часть личного кабинета про любимые места пользователя\r Использованы HTML + CSS + JavaScript.\r Ссылка на проект: https://slava-zloi.github.io/mesto/",
+  "main": "index.js",
+  "devDependencies": {
+    "webpack": "^5.74.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slava-zloi/mesto.git"
+  },
+  "author": "Вячеслав Гаранович",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Slava-zloi/mesto/issues"
+  },
+  "homepage": "https://github.com/Slava-zloi/mesto#readme"
+}
