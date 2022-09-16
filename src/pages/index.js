@@ -6,7 +6,7 @@ import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PicturePopup.js';
 import UserInfo from '../components/UserInfo.js';
-import './pages/index.css';
+import './index.css';
 import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus } from '../utils/constants.js';
 
 // в задании ПР8 был написано: Требования к коду:
