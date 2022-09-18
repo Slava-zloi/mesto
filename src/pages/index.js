@@ -27,30 +27,60 @@ const api = new Api({
   }
 });
 
-const initialCard = api.getInitialCards;
-console.log(initialCard);
-const defaultCardList = new Section({
-    data: initialElements,
-    renderer: (item) => {defaultCardList.addItem(createCard(item))}
-  },
-  elementsContainer
-);
-defaultCardList.renderElements();
+api.getInitialCards()
+  .then((data) => {
+    const defaultCardList = new Section({
+      data: data,
+      renderer: (cardInitial) => {
+        defaultCardList.addItem(
+          createCard({
+            name: cardInitial.name,
+            link: cardInitial.link,
+            alt: cardInitial.name
+          })
+        )
+      }},
+      elementsContainer
+    );
+    defaultCardList.renderElements();
+  })
+
+  .catch((error) => {
+    console.log(`Ошибка: ${error}`);
+  })
+
+  api.getUserInfo()
+  .then(res => {
+    userInfo.setUserInfo({ name: res.name, status: res.about });
+  })
+
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 
 const userInfo = new UserInfo({
   name: '.profile__name',
   status:'.profile__status'
 });
+
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
 popupWithImage.setEventListeners();
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formData) => {
-    userInfo.setUserInfo({
-      name: formData.inputProfileName,
-      status: formData.inputProfileStatus
-    });
+    api.changeUserInfo(formData.inputProfileName, formData.inputProfileStatus)
+      .then(res => {
+        if (res.ok) {
+            return res.json ();
+      }})
+      .then( res => {
+        userInfo.setUserInfo({ name: res.name, status: res.about });
+        })
+
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
     popupEdit.close();
   }
 });
@@ -79,13 +109,21 @@ formAddCardValidator.enableValidation();
 btnProfileEdit.addEventListener('click', () => {
   formEditProfileValidator.removeInputErrors();
   if (userInfo.getUserInfo()) {
-    inputProfileName.value = userInfo.getUserInfo().name;
-    inputProfileStatus.value = userInfo.getUserInfo().status;
-  }
+    api.getUserInfo()
+    .then(res => {
+        inputProfileName.value = res.name;
+        inputProfileStatus.value = res.about;
+    })
+
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+
+    }
   popupEdit.open();
 });
 
 btnElementAdd.addEventListener('click', () => {
   formAddCardValidator.removeInputErrors();
   popupAdd.open()
-});
+})
