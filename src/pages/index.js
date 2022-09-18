@@ -1,4 +1,5 @@
 import { Card } from '../components/Card.js';
+import { Api } from '../components/Api.js';
 import { FormValidator, selectorsCurrent } from '../components/FormValidator.js';
 import { initialElements } from '../components/initialElements.js';
 import Section from '../components/Section.js';
@@ -9,14 +10,6 @@ import UserInfo from '../components/UserInfo.js';
 import './index.css';
 import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus } from '../utils/constants.js';
 
-// в задании ПР8 был написано: Требования к коду:
-// ...
-// 4. В файле index.js должно остаться только создание классов и добавление некоторых обработчиков.
-// п.4  запрещает создание функций внутри index.js, поэтому и был выбран прошлый вариант реализации.
-
-// Предложенный вами вариант более изящный, конечно, но вступает в противоречие с пунктом 4 задания к ПР8, есл я правильно его понял.
-// Ниже реализовано ваше предложение, как я его понял, мне оно тоже нравится больше исходного варианта)))
-
 function createCard(item){
   const card = new Card(item, templateHtml, { handleCardClick: () => {
     popupWithImage.open(card);
@@ -26,6 +19,16 @@ function createCard(item){
   return cardElement;
 }
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-50',
+  headers: {
+    authorization: '98271a86-ee56-4c01-a13f-8848eb7ff835',
+    'Content-Type': 'application/json'
+  }
+});
+
+const initialCard = api.getInitialCards;
+console.log(initialCard);
 const defaultCardList = new Section({
     data: initialElements,
     renderer: (item) => {defaultCardList.addItem(createCard(item))}
