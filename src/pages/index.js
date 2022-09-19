@@ -1,17 +1,18 @@
 import { Card } from '../components/Card.js';
 import { Api } from '../components/Api.js';
 import { FormValidator, selectorsCurrent } from '../components/FormValidator.js';
-import { initialElements } from '../components/initialElements.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PicturePopup.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
-import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus } from '../utils/constants.js';
+import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus, myId } from '../utils/constants.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
+const isLiked = false;
 
 function createCard(item){
-  const card = new Card(item, templateHtml, { handleCardClick: () => {
+  const card = new Card(item, templateHtml, isLiked, { handleCardClick: () => {
     popupWithImage.open(card);
     }
   });
@@ -36,7 +37,9 @@ api.getInitialCards()
           createCard({
             name: cardInitial.name,
             link: cardInitial.link,
-            alt: cardInitial.name
+            alt: cardInitial.name,
+            ownerId: cardInitial.owner._id,
+            likes: cardInitial.likes
           })
         )
       }},
@@ -104,6 +107,16 @@ const popupAdd = new PopupWithForm({
   });
 popupAdd.setEventListeners();
 
+// const popupConfirm = new PopupWithConfirm ({
+//   popupSelector: '.popup_type_delete-approve',
+//   handleFormSubmit: () => {
+//     api.deleteCard()
+//     .then(res => {
+
+//     });
+//   }
+// });
+
 const formEditProfileValidator = new FormValidator(popupEdit.form, selectorsCurrent);
 formEditProfileValidator.enableValidation();
 
@@ -122,4 +135,5 @@ btnProfileEdit.addEventListener('click', () => {
 btnElementAdd.addEventListener('click', () => {
   formAddCardValidator.removeInputErrors();
   popupAdd.open()
-})
+});
+

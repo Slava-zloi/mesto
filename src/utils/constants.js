@@ -4,5 +4,5 @@ export const templateHtml = '#element-template';
 export const elementsContainer = document.querySelector('.elements');
 export const inputProfileName = document.querySelector('.popup__input_type_profile-name');
 export const inputProfileStatus = document.querySelector('.popup__input_type_profile-status');
-
+export const myId = '98271a86-ee56-4c01-a13f-8848eb7ff835';
 

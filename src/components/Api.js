@@ -1,14 +1,14 @@
 export class Api {
   constructor(config) {
     this._url = config.baseUrl;
-    this._headers= config.headers;
+    this.headers = config.headers;
   }
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: {
-        authorization: this._headers.authorization,
+        authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       }
     })
@@ -28,7 +28,7 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: {
-        authorization: this._headers.authorization,
+        authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       }
     })
@@ -48,7 +48,7 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: this._headers.authorization,
+        authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -66,7 +66,7 @@ export class Api {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: {
-        authorization: this._headers.authorization,
+        authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -80,11 +80,11 @@ export class Api {
     })
   }
 
-  deleteOwnCard(cardID) {
+  deleteCard(cardID) {
     return fetch(`${this._url}/cards/${cardID}`, {
       method: "DELETE",
       headers: {
-        authorization: this._headers.authorization,
+        authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       }
       .then(res => {
