@@ -13,7 +13,7 @@
   <header class="header">
     <a class="header__logo" href="#"></a>
   </header>
-  <!-- Всплывающая форма -->
+  <!-- Всплывающие формы: попап с формой изменения профиля -->
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть форму редактирования профиля без сохранения"></button>
@@ -33,9 +33,10 @@
       </form>
     </div>
   </div>
+     <!-- попап с формой добавления карточки-->
   <div class="popup popup_type_element">
     <div class="popup__container">
-      <button class="popup__close" type="button" aria-label="Закрыть форму добаления карточки места без создания карточки"></button>
+      <button class="popup__close" type="button" aria-label="Закрыть форму добавления карточки места без создания карточки"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="formCreateElement" novalidate>
         <label class="popup__label">
@@ -52,6 +53,7 @@
       </form>
     </div>
   </div>
+   <!-- попап с картинкой-->
   <div class="popup popup_type_for-image">
     <div class="popup__image-container">
       <button class="popup__close" type="button" aria-label="Закрыть форму просмотра изображения в увеличенном окне без сохранения"></button>
@@ -60,6 +62,34 @@
     </div>
   </div>
   <main class="content">
+   <!-- попап подтверждения удаления карточки-->
+  <div class="popup popup_type_delete-approve">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть форму добавления карточки места без создания карточки"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form" name="formApproveCardDelete" novalidate>
+        <button class="popup__button popup__button_type_delete-approve" type="submit">
+          Да
+        </button>
+      </form>
+    </div>
+  </div>
+  <!-- попап с формой обновления аватара-->
+  <div class="popup popup_type_avatar">
+  <div class="popup__container">
+    <button class="popup__close" type="button" aria-label="Закрыть форму добавления карточки места без создания карточки"></button>
+    <h2 class="popup__title">Обновить аватар</h2>
+    <form class="popup__form" name="formChangeAvatar" novalidate>
+      <label class="popup__label">
+        <input class="popup__input popup__input_avatar-link" id="element-avatar-input" type="text" placeholder="Ссылка на аватар" name="inputAvatarLink" required >
+        <span class="popup__input-error element-avatar-input-error"></span>
+      </label>
+      <button class="popup__button popup__button_type_create" type="submit">
+        Создать
+      </button>
+    </form>
+  </div>
+</div>
   <!-- блок Профиль-->
     <section class="profile">
       <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>"alt="фотография юзера"/>
@@ -81,9 +111,11 @@
       <img class="element__image" src="./images/balaklava.jpg" alt="Балклавская бухта летом: море и гора">
       <button class="element__bucket" type="button" aria-label="удалить карточку места"></button>
       <h2 class="element__title">Балаклава</h2>
-      <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
+      <div class="element__likes-container name">
+        <button class="element__heart" type="button" aria-label="Поставить лайк интересному месту"></button>
+        <output class ="element__likes-counter" name="likes-counter">0</output>
+      </div>
     </article>
   </template>
-
 </body>
 </html>

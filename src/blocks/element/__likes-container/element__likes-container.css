@@ -1,0 +1,5 @@
+.element__likes-container{
+  grid-area: heart;
+  display: flex;
+  flex-direction: column;
+}

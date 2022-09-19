@@ -63,8 +63,6 @@ api.getInitialCards()
     console.log(err); // выведем ошибку в консоль
   });
 
-
-
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
 popupWithImage.setEventListeners();
 
