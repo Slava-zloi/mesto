@@ -4,7 +4,8 @@ export class Card  {
     this.src = data.link,
     this.alt = data.alt,
     this.templateSelector = templateSelector,
-    this._handleCardClick = handleCardClick
+    this._handleCardClick = handleCardClick,
+    this.id = data._id
   }
 
   _getTemplate() {
@@ -41,7 +42,10 @@ export class Card  {
 
   _setEventListeners() {
     this._heartElement.addEventListener('click', () => { this._handleLikeClick() });
-    this._bucket.addEventListener('click', () => { this._deleteElement() });
+    this._bucket.addEventListener('click', () => {
+
+      this._deleteElement()
+    });
     this._image.addEventListener('click', () => { this._handleCardClick(this.name,this.src,this.alt)});
   }
 }

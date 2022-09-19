@@ -49,6 +49,11 @@ api.getInitialCards()
     console.log(`Ошибка: ${error}`);
   })
 
+  const userInfo = new UserInfo({
+    name: '.profile__name',
+    status:'.profile__status'
+  });
+
   api.getUserInfo()
   .then(res => {
     userInfo.setUserInfo({ name: res.name, status: res.about });
@@ -58,10 +63,7 @@ api.getInitialCards()
     console.log(err); // выведем ошибку в консоль
   });
 
-const userInfo = new UserInfo({
-  name: '.profile__name',
-  status:'.profile__status'
-});
+
 
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
 popupWithImage.setEventListeners();
@@ -70,10 +72,6 @@ const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formData) => {
     api.changeUserInfo(formData.inputProfileName, formData.inputProfileStatus)
-      .then(res => {
-        if (res.ok) {
-            return res.json ();
-      }})
       .then( res => {
         userInfo.setUserInfo({ name: res.name, status: res.about });
         })
@@ -89,12 +87,20 @@ popupEdit.setEventListeners();
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_element',
   handleFormSubmit: (formData) => {
-    defaultCardList.addNewItem(createCard({
-      name: formData.inputElementTitle,
-      link: formData.inputElementImageSrc,
-      alt: formData.inputElementTitle
-      })
-    )
+    api.makeNewCard(formData.inputElementTitle, formData.inputElementImageSrc)
+    .then(res => {
+      defaultCardList.addNewItem(createCard({
+        name: res.name,
+        link: res.link,
+        alt: res.name
+        })
+      )
+    })
+
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+
     popupAdd.close();
     }
   });
@@ -109,16 +115,8 @@ formAddCardValidator.enableValidation();
 btnProfileEdit.addEventListener('click', () => {
   formEditProfileValidator.removeInputErrors();
   if (userInfo.getUserInfo()) {
-    api.getUserInfo()
-    .then(res => {
-        inputProfileName.value = res.name;
-        inputProfileStatus.value = res.about;
-    })
-
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
-
+        inputProfileName.value = userInfo.getUserInfo().name;
+        inputProfileStatus.value = userInfo.getUserInfo().status;
     }
   popupEdit.open();
 });
