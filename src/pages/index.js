@@ -14,13 +14,20 @@ const isLiked = false;
 function createCard(item){
   const card = new Card(item, templateHtml, isLiked,
     { handleCardClick: () => {
-      popupWithImage.open(card);
-    }
+        popupWithImage.open(card);
+      },
+      handleBucketClick: (card) =>{
+        popupConfirm.open();
+      }
   });
   const cardElement = card.createCard();
   return cardElement;
 }
 
+const userInfo = new UserInfo({
+  name: '.profile__name',
+  status:'.profile__status'
+});
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-50',
   headers: {
@@ -31,15 +38,7 @@ const api = new Api({
 
 const cardList = new Section({
   renderer: (cardInitial) => {
-    cardList.addItem(
-      createCard({
-        name: cardInitial.name,
-        link: cardInitial.link,
-        alt: cardInitial.name,
-        ownerId: cardInitial.owner._id,
-        likes: cardInitial.likes
-      })
-    )
+    cardList.addItem(createCard(cardInitial))
   }},
   elementsContainer
 );
@@ -68,7 +67,7 @@ const popupAdd = new PopupWithForm({
   handleFormSubmit: (formData) => {
     api.makeNewCard(formData.inputElementTitle, formData.inputElementImageSrc)
     .then(res => {
-      defaultCardList.addNewItem(createCard({
+      cardList.addItem(createCard({
         name: res.name,
         link: res.link,
         alt: res.name
@@ -85,15 +84,16 @@ const popupAdd = new PopupWithForm({
   });
 popupAdd.setEventListeners();
 
-// const popupConfirm = new PopupWithConfirm ({
-//   popupSelector: '.popup_type_delete-approve',
-//   handleFormSubmit: () => {
-//     api.deleteCard()
-//     .then(res => {
-
-//     });
-//   }
-// });
+const popupConfirm = new PopupWithConfirm ({
+  popupSelector: '.popup_type_delete-approve',
+  handleFormSubmit: () => {
+    api.deleteCard()
+    .then(res => {
+      console.log(res);
+    });
+    popupConfirm.close();
+  }
+});
 
 const formEditProfileValidator = new FormValidator(popupEdit.form, selectorsCurrent);
 formEditProfileValidator.enableValidation();
@@ -117,7 +117,7 @@ btnElementAdd.addEventListener('click', () => {
 
 api.getInitialCards()
 .then((data) => {
-  data.forEach((cardData) => {
+  data.reverse().forEach((cardData) => {
     cardList.renderElements(cardData);
   });
 })
@@ -126,14 +126,9 @@ api.getInitialCards()
   console.log(`Ошибка: ${error}`);
 })
 
-const userInfo = new UserInfo({
-  name: '.profile__name',
-  status:'.profile__status'
-});
-
 api.getUserInfo()
 .then(res => {
-  userInfo.setUserInfo({ name: res.name, status: res.about });
+  userInfo.setUserInfo({ name: res.name, status: res.about, });
 })
 
 .catch((err) => {

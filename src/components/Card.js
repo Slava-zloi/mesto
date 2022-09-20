@@ -1,13 +1,13 @@
 export class Card  {
-  constructor(data, templateSelector, isLiked, { handleCardClick }){
+  constructor(data, templateSelector, { handleCardClick, handleBucketClick }){
     this.name = data.name,
     this.src = data.link,
     this.alt = data.alt,
     this.templateSelector = templateSelector,
     this._handleCardClick = handleCardClick,
-    this.ownerId = data.ownerId
-    this.likesNumber = data.likes.length
-    this.isLiked = isLiked;
+    this.ownerId = data.owner._id
+    this.likesNumber = data.likes.length,
+    this.id = data._id
   }
 
   _getTemplate() {
@@ -46,9 +46,9 @@ export class Card  {
     this._bucket = this._element.querySelector('.element__bucket');
     this._likesCounter = this._element.querySelector('.element__likes-counter');
 
-    if (myId !== this.ownerId){
-      this._bucket.classList.add('.element__bucket_inactive')
-    }
+    // if (myId !== this.ownerId){
+    //   this._bucket.classList.add('.element__bucket_inactive');
+    // }
 
     this._title.textContent = this.name;
     this._image.src = this.src;

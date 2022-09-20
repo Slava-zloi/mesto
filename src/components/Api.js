@@ -54,11 +54,12 @@ export class Api {
       body: JSON.stringify({
         name: name,
         about: status
+        })
       })
-      .then(res => {
+    .then(res => {
         if (res.ok) {
             return res.json ();
-      }})
+        }
     })
   }
 
@@ -72,11 +73,12 @@ export class Api {
       body: JSON.stringify({
         name: name,
         link: link
+        })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json ();
-      }})
+    .then(res => {
+      if (res.ok) {
+        return res.json ();
+      }
     })
   }
 
