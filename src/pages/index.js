@@ -12,8 +12,9 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js';
 const isLiked = false;
 
 function createCard(item){
-  const card = new Card(item, templateHtml, isLiked, { handleCardClick: () => {
-    popupWithImage.open(card);
+  const card = new Card(item, templateHtml, isLiked,
+    { handleCardClick: () => {
+      popupWithImage.open(card);
     }
   });
   const cardElement = card.createCard();
@@ -28,43 +29,20 @@ const api = new Api({
   }
 });
 
-api.getInitialCards()
-  .then((data) => {
-    const defaultCardList = new Section({
-      data: data,
-      renderer: (cardInitial) => {
-        defaultCardList.addItem(
-          createCard({
-            name: cardInitial.name,
-            link: cardInitial.link,
-            alt: cardInitial.name,
-            ownerId: cardInitial.owner._id,
-            likes: cardInitial.likes
-          })
-        )
-      }},
-      elementsContainer
-    );
-    defaultCardList.renderElements();
-  })
-
-  .catch((error) => {
-    console.log(`Ошибка: ${error}`);
-  })
-
-  const userInfo = new UserInfo({
-    name: '.profile__name',
-    status:'.profile__status'
-  });
-
-  api.getUserInfo()
-  .then(res => {
-    userInfo.setUserInfo({ name: res.name, status: res.about });
-  })
-
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+const cardList = new Section({
+  renderer: (cardInitial) => {
+    cardList.addItem(
+      createCard({
+        name: cardInitial.name,
+        link: cardInitial.link,
+        alt: cardInitial.name,
+        ownerId: cardInitial.owner._id,
+        likes: cardInitial.likes
+      })
+    )
+  }},
+  elementsContainer
+);
 
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
 popupWithImage.setEventListeners();
@@ -136,4 +114,31 @@ btnElementAdd.addEventListener('click', () => {
   formAddCardValidator.removeInputErrors();
   popupAdd.open()
 });
+
+api.getInitialCards()
+.then((data) => {
+  data.forEach((cardData) => {
+    cardList.renderElements(cardData);
+  });
+})
+
+.catch((error) => {
+  console.log(`Ошибка: ${error}`);
+})
+
+const userInfo = new UserInfo({
+  name: '.profile__name',
+  status:'.profile__status'
+});
+
+api.getUserInfo()
+.then(res => {
+  userInfo.setUserInfo({ name: res.name, status: res.about });
+})
+
+.catch((err) => {
+  console.log(err); // выведем ошибку в консоль
+});
+
+
 
