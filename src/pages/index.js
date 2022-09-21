@@ -18,9 +18,17 @@ function createCard(item){
     { handleCardClick: () => {
         popupWithImage.open(card);
       },
-       handleBucketClick: (cardId) => {
-        popupConfirm.open(cardId);
-      }
+      handleBucketClick: (cardId) => {
+      popupConfirm.open(cardId);
+      popupConfirm.setSubmitAction(() => {
+        api.deleteCard(card.id)
+        .then(res => {
+          card.deleteElement();
+          popupConfirm.close();
+        });
+
+      })
+    }
   });
   const cardElement = card.createCard();
   return cardElement;
@@ -81,17 +89,7 @@ const popupAdd = new PopupWithForm({
   });
 popupAdd.setEventListeners();
 
-const popupConfirm = new PopupWithConfirm ({
-  popupSelector: '.popup_type_delete-approve',
-
-  handleFormSubmit: (cardId) => {
-    api.deleteCard(cardId)
-    .then(res => {
-      // card.deleteElement();
-    });
-    popupConfirm.close();
-  }
-});
+const popupConfirm = new PopupWithConfirm ({popupSelector: '.popup_type_delete-approve'});
 popupConfirm.setEventListeners();
 
 const formEditProfileValidator = new FormValidator(popupEdit.form, selectorsCurrent);
