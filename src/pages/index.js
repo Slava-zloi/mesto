@@ -18,8 +18,8 @@ function createCard(item){
     { handleCardClick: () => {
         popupWithImage.open(card);
       },
-       handleBucketClick: (card) => {
-        popupConfirm.open();
+       handleBucketClick: (cardId) => {
+        popupConfirm.open(cardId);
       }
   });
   const cardElement = card.createCard();
@@ -70,7 +70,7 @@ const popupAdd = new PopupWithForm({
   handleFormSubmit: (formData) => {
     api.makeNewCard(formData.inputElementTitle, formData.inputElementImageSrc)
     .then(res => {
-      cardList.renderElements(cardData);
+      cardList.renderElements(res);
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -84,14 +84,15 @@ popupAdd.setEventListeners();
 const popupConfirm = new PopupWithConfirm ({
   popupSelector: '.popup_type_delete-approve',
 
-  handleFormSubmit: (card) => {
-    api.deleteCard(card.id())
+  handleFormSubmit: (cardId) => {
+    api.deleteCard(cardId)
     .then(res => {
-      card.deleteElement();
+      // card.deleteElement();
     });
     popupConfirm.close();
   }
 });
+popupConfirm.setEventListeners();
 
 const formEditProfileValidator = new FormValidator(popupEdit.form, selectorsCurrent);
 formEditProfileValidator.enableValidation();

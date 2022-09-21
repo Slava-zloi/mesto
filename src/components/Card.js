@@ -61,9 +61,9 @@ export class Card  {
     return this._element;
   }
 
-  id(){
-    return this.id;
-  }
+  // id(){
+  //   return this.id;
+  // }
 
   _setEventListeners() {
     this._heartElement.addEventListener('click', () => {
@@ -71,7 +71,7 @@ export class Card  {
     });
 
     this._bucket.addEventListener('click', () => {
-      this._handleBucketClick();
+      this._handleBucketClick(this.id);
     });
 
     this._image.addEventListener('click', () => {

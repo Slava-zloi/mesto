@@ -88,12 +88,11 @@ export class Api {
       headers: {
         authorization: this.headers.authorization,
         'Content-Type': 'application/json'
-      }
+      }})
       .then(res => {
         if (res.ok) {
           return res.json ();
       }})
-    })
+    }
   }
-}
 
