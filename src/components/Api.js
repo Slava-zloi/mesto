@@ -24,7 +24,7 @@ export class Api {
     });
   }
 
-  getUserInfo() {
+  getProfile() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: {

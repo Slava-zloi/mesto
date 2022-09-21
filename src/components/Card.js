@@ -1,13 +1,15 @@
 export class Card  {
   constructor(data, templateSelector, { handleCardClick, handleBucketClick }){
-    this.name = data.name,
-    this.src = data.link,
-    this.alt = data.alt,
-    this.templateSelector = templateSelector,
-    this._handleCardClick = handleCardClick,
-    this.ownerId = data.owner._id
-    this.likesNumber = data.likes.length,
-    this.id = data._id
+    this.name = data.name;
+    this.src = data.link;
+    this.alt = data.name;
+    this.templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+    this._handleBucketClick = handleBucketClick;
+    this.ownerId = data.owner._id;
+    this.likesNumber = data.likes.length;
+    this.id = data._id;
+    this.isLiked = false;
   }
 
   _getTemplate() {
@@ -20,6 +22,7 @@ export class Card  {
   }
 
   _handleLikeClick() {
+
     if (this.isLiked){
       this._heartElement.classList.remove('element__heart_active');
       this.isLiked = false;
@@ -34,7 +37,7 @@ export class Card  {
     this._likesCounter.value = this.likesNumber;
   }
 
-  _deleteElement() {
+  deleteElement() {
     this._element.remove();
     this._element = null;
   }
@@ -58,13 +61,17 @@ export class Card  {
     return this._element;
   }
 
+  id(){
+    return this.id;
+  }
+
   _setEventListeners() {
     this._heartElement.addEventListener('click', () => {
       this._handleLikeClick();
     });
 
     this._bucket.addEventListener('click', () => {
-
+      this._handleBucketClick();
     });
 
     this._image.addEventListener('click', () => {

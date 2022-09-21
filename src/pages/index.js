@@ -9,14 +9,16 @@ import UserInfo from '../components/UserInfo.js';
 import './index.css';
 import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus, myId } from '../utils/constants.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
+
+let userId = {};
 const isLiked = false;
 
 function createCard(item){
-  const card = new Card(item, templateHtml, isLiked,
+  const card = new Card(item, templateHtml,
     { handleCardClick: () => {
         popupWithImage.open(card);
       },
-      handleBucketClick: (card) =>{
+       handleBucketClick: (card) => {
         popupConfirm.open();
       }
   });
@@ -28,6 +30,7 @@ const userInfo = new UserInfo({
   name: '.profile__name',
   status:'.profile__status'
 });
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-50',
   headers: {
@@ -67,14 +70,8 @@ const popupAdd = new PopupWithForm({
   handleFormSubmit: (formData) => {
     api.makeNewCard(formData.inputElementTitle, formData.inputElementImageSrc)
     .then(res => {
-      cardList.addItem(createCard({
-        name: res.name,
-        link: res.link,
-        alt: res.name
-        })
-      )
+      cardList.renderElements(cardData);
     })
-
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
     });
@@ -86,10 +83,11 @@ popupAdd.setEventListeners();
 
 const popupConfirm = new PopupWithConfirm ({
   popupSelector: '.popup_type_delete-approve',
-  handleFormSubmit: () => {
-    api.deleteCard()
+
+  handleFormSubmit: (card) => {
+    api.deleteCard(card.id())
     .then(res => {
-      console.log(res);
+      card.deleteElement();
     });
     popupConfirm.close();
   }
@@ -126,9 +124,10 @@ api.getInitialCards()
   console.log(`Ошибка: ${error}`);
 })
 
-api.getUserInfo()
+api.getProfile()
 .then(res => {
-  userInfo.setUserInfo({ name: res.name, status: res.about, });
+  userId = res._id;
+  userInfo.setUserInfo({ name: res.name, status: res.about });
 })
 
 .catch((err) => {
