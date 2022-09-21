@@ -14,22 +14,22 @@ let userId = {};
 const isLiked = false;
 
 function createCard(item){
-  const card = new Card(item, templateHtml,
+  const card = new Card(item, templateHtml, userId,
     { handleCardClick: () => {
         popupWithImage.open(card);
       },
-      handleBucketClick: (cardId) => {
-      popupConfirm.open(cardId);
-      popupConfirm.setSubmitAction(() => {
-        api.deleteCard(card.id)
-        .then(res => {
-          card.deleteElement();
-          popupConfirm.close();
-        });
-
-      })
+      handleBucketClick: () => {
+        popupConfirm.open(card.id);
+        popupConfirm.setSubmitAction(() => {
+          api.deleteCard(card.id)
+          .then(res => {
+            card.deleteElement();
+            popupConfirm.close();
+          });
+        })
+      }
     }
-  });
+  );
   const cardElement = card.createCard();
   return cardElement;
 }

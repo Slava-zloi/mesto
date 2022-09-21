@@ -1,5 +1,5 @@
 export class Card  {
-  constructor(data, templateSelector, { handleCardClick, handleBucketClick }){
+  constructor(data, templateSelector, userId, { handleCardClick, handleBucketClick }){
     this.name = data.name;
     this.src = data.link;
     this.alt = data.name;
@@ -10,6 +10,7 @@ export class Card  {
     this.likesNumber = data.likes.length;
     this.id = data._id;
     this.isLiked = false;
+    this.userId = userId;
   }
 
   _getTemplate() {
@@ -41,7 +42,7 @@ export class Card  {
     this._element.remove();
     this._element = null;
   }
-   createCard(myId) {
+   createCard() {
     this._element = this._getTemplate();
     this._heartElement = this._element.querySelector('.element__heart');
     this._title = this._element.querySelector('.element__title');
@@ -49,9 +50,9 @@ export class Card  {
     this._bucket = this._element.querySelector('.element__bucket');
     this._likesCounter = this._element.querySelector('.element__likes-counter');
 
-    // if (myId !== this.ownerId){
-    //   this._bucket.classList.add('.element__bucket_inactive');
-    // }
+    if (this.userId !== this.ownerId){
+      this._bucket.classList.add('element__bucket_inactive');
+    }
 
     this._title.textContent = this.name;
     this._image.src = this.src;
@@ -60,10 +61,6 @@ export class Card  {
     this._setLikesCounter();
     return this._element;
   }
-
-  // id(){
-  //   return this.id;
-  // }
 
   _setEventListeners() {
     this._heartElement.addEventListener('click', () => {
