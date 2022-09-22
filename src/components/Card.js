@@ -1,15 +1,19 @@
 export class Card  {
-  constructor(data, templateSelector, userId, { handleCardClick, handleBucketClick }){
+  constructor(data, templateSelector, userId, { handleCardClick, handleBucketClick, handleLikeClick }){
+    this.data = data;
     this.name = data.name;
     this.src = data.link;
     this.alt = data.name;
     this.templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleBucketClick = handleBucketClick;
+    this.handleLikeClick = handleLikeClick;
     this.ownerId = data.owner._id;
+    this.likes = data.likes;
+    this.likes.id = data.likes._id;
     this.likesNumber = data.likes.length;
     this.id = data._id;
-    this.isLiked = false;
+    // this.isLiked = false;
     this.userId = userId;
   }
 
@@ -22,26 +26,25 @@ export class Card  {
     return itemElement;
   }
 
-  _handleLikeClick() {
-
-    if (this.isLiked){
-      this._heartElement.classList.remove('element__heart_active');
-      this.isLiked = false;
-    }
-    else {
-      this._heartElement.classList.add('element__heart_active');
-      this.isLiked = true;
-    }
+  handleLikeToggle() {
+      this._heartElement.classList.toggle('element__heart_active');
   }
 
-  _setLikesCounter(idArray) {
-    this._likesCounter.value = this.likesNumber;
+  setLikesCounter(cardData) {
+    this._likesCounter.value = cardData.likes.length;
   }
 
   deleteElement() {
     this._element.remove();
     this._element = null;
   }
+
+  isLiked(){
+    return Boolean(this.likes.find(user =>
+      user._id === this.userId
+    ));
+  }
+
    createCard() {
     this._element = this._getTemplate();
     this._heartElement = this._element.querySelector('.element__heart');
@@ -54,17 +57,17 @@ export class Card  {
       this._bucket.classList.add('element__bucket_inactive');
     }
 
+    this.setLikesCounter(this.data);
     this._title.textContent = this.name;
     this._image.src = this.src;
     this._image.alt = this.alt;
     this._setEventListeners();
-    this._setLikesCounter();
     return this._element;
   }
 
   _setEventListeners() {
     this._heartElement.addEventListener('click', () => {
-      this._handleLikeClick();
+      this.handleLikeClick();
     });
 
     this._bucket.addEventListener('click', () => {

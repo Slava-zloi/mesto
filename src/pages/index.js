@@ -11,7 +11,6 @@ import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputPr
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 
 let userId = {};
-const isLiked = false;
 
 function createCard(item){
   const card = new Card(item, templateHtml, userId,
@@ -27,10 +26,20 @@ function createCard(item){
             popupConfirm.close();
           });
         })
+      },
+      handleLikeClick: () => {
+        api.changeLikeStatus(card.id,card.isLiked())
+        .then(res => {
+          card.handleLikeToggle();
+          card.setLikesCounter(res);
+          card.likes = res.likes;
+        });
       }
-    }
-  );
+    });
   const cardElement = card.createCard();
+  if (card.isLiked()){
+    card.handleLikeToggle();
+   }
   return cardElement;
 }
 

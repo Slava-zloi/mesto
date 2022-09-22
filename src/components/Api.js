@@ -4,6 +4,7 @@ export class Api {
     this.headers = config.headers;
   }
 
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
@@ -12,16 +13,10 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
 
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
   }
 
   getProfile() {
@@ -32,16 +27,9 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+    .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
   }
 
   changeUserInfo(name, status) {
@@ -56,11 +44,9 @@ export class Api {
         about: status
         })
       })
-    .then(res => {
-        if (res.ok) {
-            return res.json ();
-        }
-    })
+      .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
   }
 
   makeNewCard(name, link) {
@@ -75,11 +61,9 @@ export class Api {
         link: link
         })
       })
-    .then(res => {
-      if (res.ok) {
-        return res.json ();
-      }
-    })
+      .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
   }
 
   deleteCard(cardID) {
@@ -89,10 +73,35 @@ export class Api {
         authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       }})
-      .then(res => {
-        if (res.ok) {
-          return res.json ();
-      }})
+      .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+    }
+  changeLikeStatus(cardID, isLiked){
+    if (!isLiked) {
+      return fetch(`${this._url}/cards/${cardID}/likes`, {
+        method: 'PUT',
+        headers: {
+          authorization: this.headers.authorization,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+    }
+    else {
+      return fetch(`${this._url}/cards/${cardID}/likes`, {
+        method: 'DELETE',
+        headers: {
+          authorization: this.headers.authorization,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
     }
   }
+}
 
