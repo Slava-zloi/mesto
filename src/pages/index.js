@@ -7,7 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PicturePopup.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
-import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus, myId } from '../utils/constants.js';
+import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus, btnAvatar, inputAvatarLink, } from '../utils/constants.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 
 let userId = null;
@@ -43,9 +43,18 @@ function createCard(item){
   return cardElement;
 }
 
+function renderLoading(isLoading, btn, text) {
+  if (isLoading === true) {
+    btn.textContent = 'Сохранение...';
+  } else if (isLoading === false) {
+    btn.textContent = text;
+  }
+}
+
 const userInfo = new UserInfo({
   name: '.profile__name',
-  status:'.profile__status'
+  status:'.profile__status',
+  avatar:'.profile__avatar'
 });
 
 const api = new Api({
@@ -66,20 +75,40 @@ const cardList = new Section({
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
 popupWithImage.setEventListeners();
 
-const popupAvatar = new PopupWithForm({ popupSelector: '.popup_type_for-image' });
+const popupAvatar = new PopupWithForm({
+  popupSelector: '.popup_type_avatar',
+  handleFormSubmit: (formData) => {
+    renderLoading(true, formData, '');
+    api.changeAvatar(inputAvatarLink.value)
+    .then(res =>{
+      userInfo.setUserInfo({name: res.name, status: res.about, avatar: res.avatar })
+      popupAvatar.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(()=> {
+      renderLoading(false, formData, 'Сохранить');
+    })
+  }
+});
 popupAvatar.setEventListeners();
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formData) => {
+    renderLoading(true, formData, '');
     api.changeUserInfo(formData.inputProfileName, formData.inputProfileStatus)
       .then( res => {
-        userInfo.setUserInfo({ name: res.name, status: res.about });
+        userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
         })
 
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-      });
+      })
+      .finally(()=> {
+        renderLoading(false, formData, 'Сохранить');
+      })
     popupEdit.close();
   }
 });
@@ -124,11 +153,15 @@ btnElementAdd.addEventListener('click', () => {
   popupAdd.open()
 });
 
+btnAvatar.addEventListener('click', () => {
+  popupAvatar.open();
+});
+
 api.getInitialCards()
 .then((data) => {
   data.reverse().forEach((cardData) => {
     cardList.renderElements(cardData);
-  });
+  });s
 })
 
 .catch((error) => {
@@ -138,7 +171,7 @@ api.getInitialCards()
 api.getProfile()
 .then(res => {
   userId = res._id;
-  userInfo.setUserInfo({ name: res.name, status: res.about });
+  userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
 })
 
 .catch((err) => {
