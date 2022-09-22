@@ -77,8 +77,8 @@ popupWithImage.setEventListeners();
 
 const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
-  handleFormSubmit: (formData) => {
-    renderLoading(true, formData, '');
+  handleFormSubmit: () => {
+    renderLoading(true, popupAvatar.buttonSubmit, '');
     api.changeAvatar(inputAvatarLink.value)
     .then(res =>{
       userInfo.setUserInfo({name: res.name, status: res.about, avatar: res.avatar })
@@ -88,7 +88,7 @@ const popupAvatar = new PopupWithForm({
       console.log(err);
     })
     .finally(()=> {
-      renderLoading(false, formData, 'Сохранить');
+      renderLoading(false, popupAvatar.buttonSubmit, 'Сохранить');
     })
   }
 });
@@ -97,7 +97,7 @@ popupAvatar.setEventListeners();
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (formData) => {
-    renderLoading(true, formData, '');
+    renderLoading(true, popupEdit.buttonSubmit, '');
     api.changeUserInfo(formData.inputProfileName, formData.inputProfileStatus)
       .then( res => {
         userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
@@ -107,7 +107,7 @@ const popupEdit = new PopupWithForm({
         console.log(err); // выведем ошибку в консоль
       })
       .finally(()=> {
-        renderLoading(false, formData, 'Сохранить');
+        renderLoading(false, popupEdit.buttonSubmit, 'Сохранить');
       })
     popupEdit.close();
   }
@@ -123,6 +123,9 @@ const popupAdd = new PopupWithForm({
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
+    })
+    .finally(()=> {
+      renderLoading(tfalse, popupAdd.buttonSubmit, 'Создать');
     });
 
     popupAdd.close();
@@ -139,6 +142,9 @@ formEditProfileValidator.enableValidation();
 const formAddCardValidator = new FormValidator(popupAdd.form, selectorsCurrent);
 formAddCardValidator.enableValidation();
 
+const formChangeAvatar = new FormValidator(popupAvatar.form, selectorsCurrent);
+formChangeAvatar.enableValidation();
+
 btnProfileEdit.addEventListener('click', () => {
   formEditProfileValidator.removeInputErrors();
   if (userInfo.getUserInfo()) {
@@ -154,6 +160,7 @@ btnElementAdd.addEventListener('click', () => {
 });
 
 btnAvatar.addEventListener('click', () => {
+  formChangeAvatar.removeInputErrors();
   popupAvatar.open();
 });
 
