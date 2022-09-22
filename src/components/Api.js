@@ -44,7 +44,7 @@ export class Api {
         about: status
         })
       })
-      .then(res => {if (res.ok) {return res.json()}
+    .then(res => {if (res.ok) {return res.json()}
       return Promise.reject(`Ошибка: ${res.status}`)})
     .catch((err) => {console.log(err)}); // выведем ошибку в консоль
   }
@@ -61,7 +61,7 @@ export class Api {
         link: link
         })
       })
-      .then(res => {if (res.ok) {return res.json()}
+    .then(res => {if (res.ok) {return res.json()}
       return Promise.reject(`Ошибка: ${res.status}`)})
     .catch((err) => {console.log(err)}); // выведем ошибку в консоль
   }
@@ -73,7 +73,7 @@ export class Api {
         authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       }})
-      .then(res => {if (res.ok) {return res.json()}
+    .then(res => {if (res.ok) {return res.json()}
       return Promise.reject(`Ошибка: ${res.status}`)})
     .catch((err) => {console.log(err)}); // выведем ошибку в консоль
     }
@@ -86,7 +86,7 @@ export class Api {
           'Content-Type': 'application/json'
         }
       })
-      .then(res => {if (res.ok) {return res.json()}
+    .then(res => {if (res.ok) {return res.json()}
       return Promise.reject(`Ошибка: ${res.status}`)})
     .catch((err) => {console.log(err)}); // выведем ошибку в консоль
     }
@@ -98,10 +98,26 @@ export class Api {
           'Content-Type': 'application/json'
         }
       })
-      .then(res => {if (res.ok) {return res.json()}
+    .then(res => {if (res.ok) {return res.json()}
       return Promise.reject(`Ошибка: ${res.status}`)})
     .catch((err) => {console.log(err)}); // выведем ошибку в консоль
     }
+  }
+
+  changeAvatar(avatar){
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this.headers.authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: avatar
+        })
+    })
+    .then(res => {if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)})
+    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
   }
 }
 

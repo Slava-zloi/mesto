@@ -10,7 +10,7 @@ import './index.css';
 import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus, myId } from '../utils/constants.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 
-let userId = {};
+let userId = null;
 
 function createCard(item){
   const card = new Card(item, templateHtml, userId,
@@ -65,6 +65,9 @@ const cardList = new Section({
 
 const popupWithImage = new PopupWithImage({ popupSelector: '.popup_type_for-image' });
 popupWithImage.setEventListeners();
+
+const popupAvatar = new PopupWithForm({ popupSelector: '.popup_type_for-image' });
+popupAvatar.setEventListeners();
 
 const popupEdit = new PopupWithForm({
   popupSelector: '.popup_type_profile',
