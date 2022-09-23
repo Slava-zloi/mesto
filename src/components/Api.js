@@ -5,6 +5,11 @@ export class Api {
   }
 
 
+  _CheckServerAnswer(res){
+    if (res.ok) {return res.json()}
+      return Promise.reject(`Ошибка: ${res.status}`)
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
@@ -13,9 +18,8 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+    .then((res) => this._CheckServerAnswer(res))
+
 
   }
 
@@ -27,9 +31,7 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+    .then((res) => this._CheckServerAnswer(res))
   }
 
   changeUserInfo(name, status) {
@@ -44,9 +46,7 @@ export class Api {
         about: status
         })
       })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+      .then((res) => this._CheckServerAnswer(res))
   }
 
   makeNewCard(name, link) {
@@ -61,9 +61,7 @@ export class Api {
         link: link
         })
       })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+      .then((res) => this._CheckServerAnswer(res))
   }
 
   deleteCard(cardID) {
@@ -73,9 +71,7 @@ export class Api {
         authorization: this.headers.authorization,
         'Content-Type': 'application/json'
       }})
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+      .then((res) => this._CheckServerAnswer(res))
     }
   changeLikeStatus(cardID, isLiked){
     if (!isLiked) {
@@ -86,9 +82,7 @@ export class Api {
           'Content-Type': 'application/json'
         }
       })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+      .then((res) => this._CheckServerAnswer(res))
     }
     else {
       return fetch(`${this._url}/cards/${cardID}/likes`, {
@@ -98,9 +92,7 @@ export class Api {
           'Content-Type': 'application/json'
         }
       })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+      .then((res) => this._CheckServerAnswer(res))
     }
   }
 
@@ -115,9 +107,7 @@ export class Api {
         avatar: avatar
         })
     })
-    .then(res => {if (res.ok) {return res.json()}
-      return Promise.reject(`Ошибка: ${res.status}`)})
-    .catch((err) => {console.log(err)}); // выведем ошибку в консоль
+    .then((res) => this._CheckServerAnswer(res))
   }
 }
 

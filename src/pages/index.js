@@ -9,7 +9,7 @@ import UserInfo from '../components/UserInfo.js';
 import './index.css';
 import { btnProfileEdit, btnElementAdd, templateHtml, elementsContainer, inputProfileName, inputProfileStatus, btnAvatar, inputAvatarLink, } from '../utils/constants.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
-
+import { renderLoading } from '../utils/utils.js'
 let userId = null;
 
 function createCard(item){
@@ -24,9 +24,13 @@ function createCard(item){
           api.deleteCard(card.id)
           .then(res => {
             card.deleteElement();
-            renderLoading(false, popupConfirm.buttonSubmit, 'Да');
             popupConfirm.close();
-          });
+          })
+          .catch((err) => {console.log(err)
+          }) // выведем ошибку в консоль
+          .finally(
+            renderLoading(false, popupConfirm.buttonSubmit, 'Да')
+          )
         })
       },
       handleLikeClick: () => {
@@ -35,7 +39,9 @@ function createCard(item){
           card.handleLikeToggle();
           card.setLikesCounter(res);
           card.likes = res.likes;
-        });
+        })
+        .catch((err) => {console.log(err)
+        }); // выведем ошибку в консоль
       }
     });
   const cardElement = card.createCard();
@@ -43,14 +49,6 @@ function createCard(item){
     card.handleLikeToggle();
    }
   return cardElement;
-}
-
-function renderLoading(isLoading, btn, text) {
-  if (isLoading === true) {
-    btn.textContent = 'Сохранение...';
-  } else if (isLoading === false) {
-    btn.textContent = text;
-  }
 }
 
 const userInfo = new UserInfo({
@@ -103,15 +101,15 @@ const popupEdit = new PopupWithForm({
     api.changeUserInfo(formData.inputProfileName, formData.inputProfileStatus)
       .then( res => {
         userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
+        popupEdit.close();
         })
-
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       })
       .finally(()=> {
         renderLoading(false, popupEdit.buttonSubmit, 'Сохранить');
       })
-    popupEdit.close();
+
   }
 });
 popupEdit.setEventListeners();
@@ -119,9 +117,11 @@ popupEdit.setEventListeners();
 const popupAdd = new PopupWithForm({
   popupSelector: '.popup_type_element',
   handleFormSubmit: (formData) => {
+    renderLoading(true, popupAdd.buttonSubmit, '');
     api.makeNewCard(formData.inputElementTitle, formData.inputElementImageSrc)
     .then(res => {
       cardList.renderElements(res);
+      popupAdd.close();
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -129,10 +129,8 @@ const popupAdd = new PopupWithForm({
     .finally(()=> {
       renderLoading(false, popupAdd.buttonSubmit, 'Создать');
     });
-
-    popupAdd.close();
-    }
-  });
+  }
+});
 popupAdd.setEventListeners();
 
 const popupConfirm = new PopupWithConfirm ({popupSelector: '.popup_type_delete-approve'});
@@ -166,26 +164,15 @@ btnAvatar.addEventListener('click', () => {
   popupAvatar.open();
 });
 
-api.getInitialCards()
-.then((data) => {
+Promise.all([api.getProfile(), api.getInitialCards()])
+.then(([res, data]) => {
+  userId = res._id;
+  userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
   data.reverse().forEach((cardData) => {
     cardList.renderElements(cardData);
   });
 })
-
 .catch((error) => {
   console.log(`Ошибка: ${error}`);
 })
-
-api.getProfile()
-.then(res => {
-  userId = res._id;
-  userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
-})
-
-.catch((err) => {
-  console.log(err); // выведем ошибку в консоль
-});
-
-
 
