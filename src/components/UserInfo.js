@@ -13,6 +13,6 @@ export default class UserInfo{
   setUserInfo(data) {
     this._userName.textContent = data.name;
     this._userStatus.textContent = data.status;
-    this._userAvatar.src = data.avatar;
+    this._userAvatar.style.backgroundImage = `url(${data.avatar})`;
   }
 }

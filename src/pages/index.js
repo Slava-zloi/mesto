@@ -20,9 +20,11 @@ function createCard(item){
       handleBucketClick: () => {
         popupConfirm.open(card.id);
         popupConfirm.setSubmitAction(() => {
+          renderLoading(true, popupConfirm.buttonSubmit, '');
           api.deleteCard(card.id)
           .then(res => {
             card.deleteElement();
+            renderLoading(false, popupConfirm.buttonSubmit, 'Да');
             popupConfirm.close();
           });
         })
@@ -125,7 +127,7 @@ const popupAdd = new PopupWithForm({
       console.log(err); // выведем ошибку в консоль
     })
     .finally(()=> {
-      renderLoading(tfalse, popupAdd.buttonSubmit, 'Создать');
+      renderLoading(false, popupAdd.buttonSubmit, 'Создать');
     });
 
     popupAdd.close();
@@ -168,7 +170,7 @@ api.getInitialCards()
 .then((data) => {
   data.reverse().forEach((cardData) => {
     cardList.renderElements(cardData);
-  });s
+  });
 })
 
 .catch((error) => {

@@ -3,6 +3,7 @@ import Popup from "./Popup.js";
 export default class PopupWithConfirm extends Popup {
   constructor({ popupSelector,}) {
     super({ popupSelector });
+    this.buttonSubmit = this.form.querySelector('.popup__button');
   }
 
   open(cardId) {
