@@ -10,10 +10,7 @@ export class Card  {
     this.handleLikeClick = handleLikeClick;
     this.ownerId = data.owner._id;
     this.likes = data.likes;
-    // this.likes.id = data.likes._id;
-    // this.likesNumber = data.likes.length;
     this.id = data._id;
-    // this.isLiked = false;
     this.userId = userId;
   }
 
