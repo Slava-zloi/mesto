@@ -1,9 +1,8 @@
 export default class UserInfo{
   constructor(dataSelector){
-    this._userNameSelector = dataSelector.name;
-    this._userName = document.querySelector(this._userNameSelector);
-    this._userStatusSelector = dataSelector.status;
-    this._userStatus = document.querySelector(this._userStatusSelector);
+    this._userName = document.querySelector(dataSelector.name);
+    this._userStatus = document.querySelector(dataSelector.status);
+    this._userAvatar = document.querySelector(dataSelector.avatar);
   }
 
   getUserInfo(){
@@ -11,8 +10,9 @@ export default class UserInfo{
     return this._userData;
   }
 
-  setUserInfo(data){
+  setUserInfo(data) {
     this._userName.textContent = data.name;
     this._userStatus.textContent = data.status;
+    this._userAvatar.style.backgroundImage = `url(${data.avatar})`;
   }
 }

@@ -1,0 +1,4 @@
+.element__bucket_inactive {
+  display: none;
+  background-color: crimson;
+}
