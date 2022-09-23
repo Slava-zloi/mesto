@@ -2,8 +2,11 @@
   display: grid;
   align-items: center;
   width: 100%;
+  max-width: 880px;
+  min-height: 212px;
   box-sizing: border-box;
   grid-template-columns:  120px minmax(264px, max-content) max-content 1fr;
+
 }
 
 @media screen and (max-width: 680px) {
