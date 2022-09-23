@@ -109,7 +109,6 @@ const popupEdit = new PopupWithForm({
       .finally(()=> {
         renderLoading(false, popupEdit.buttonSubmit, 'Сохранить');
       })
-
   }
 });
 popupEdit.setEventListeners();
@@ -120,7 +119,7 @@ const popupAdd = new PopupWithForm({
     renderLoading(true, popupAdd.buttonSubmit, '');
     api.makeNewCard(formData.inputElementTitle, formData.inputElementImageSrc)
     .then(res => {
-      cardList.renderElements(res);
+      cardList.renderElements([res]);
       popupAdd.close();
     })
     .catch((err) => {
@@ -168,9 +167,7 @@ Promise.all([api.getProfile(), api.getInitialCards()])
 .then(([res, data]) => {
   userId = res._id;
   userInfo.setUserInfo({ name: res.name, status: res.about, avatar: res.avatar });
-  data.reverse().forEach((cardData) => {
-    cardList.renderElements(cardData);
-  });
+  cardList.renderElements(data.reverse());
 })
 .catch((error) => {
   console.log(`Ошибка: ${error}`);
